@@ -23,6 +23,9 @@ proguard/
 
 #Gradle
 .gradletasknamecache
-.gradle/
 build/
 bin/
+.gradle
+/gradlew
+/gradlew.bat
+/gradle/
