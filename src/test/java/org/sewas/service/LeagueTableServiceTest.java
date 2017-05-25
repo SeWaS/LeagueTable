@@ -9,10 +9,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.sewas.client.OpenLigaDBClient;
 import org.sewas.domain.model.dto.MatchDTO;
 import org.sewas.domain.model.model.*;
-import org.sewas.util.GoalBuilder;
-import org.sewas.util.GroupBuilder;
-import org.sewas.util.MatchBuilder;
-import org.sewas.util.TeamBuilder;
+import org.sewas.util.*;
 import service.LeagueTableService;
 
 import java.util.ArrayList;
@@ -68,6 +65,16 @@ public class LeagueTableServiceTest {
                     .withScoreTeam2(2)
                     .isOwnGoal(true)
                     .build())
+                .withResult(new MatchResultBuilder()
+                        .withResultID(1)
+                        .withPointsForTeam1(0)
+                        .withPointsForTeam2(1)
+                        .build())
+                .withResult(new MatchResultBuilder()
+                        .withResultID(2)
+                        .withPointsForTeam1(1)
+                        .withPointsForTeam2(2)
+                        .build())
                 .build();
 
         Match match2 = new MatchBuilder()
@@ -97,6 +104,16 @@ public class LeagueTableServiceTest {
                         .withScoreTeam1(1)
                         .withScoreTeam2(1)
                         .build())
+                .withResult(new MatchResultBuilder()
+                    .withResultID(1)
+                    .withPointsForTeam1(0)
+                    .withPointsForTeam2(0)
+                    .build())
+                .withResult(new MatchResultBuilder()
+                    .withResultID(2)
+                    .withPointsForTeam1(1)
+                    .withPointsForTeam2(1)
+                    .build())
                 .build();
 
         Match[] mockMatches = new Match[]{match1, match2};
@@ -111,9 +128,8 @@ public class LeagueTableServiceTest {
 
         LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID");
 
-        assertThat(receivedLeagueTable.getLeagueID()).isNotNull();
-        assertThat(receivedLeagueTable.getTable()).isNotNull();
-        assertThat(receivedLeagueTable.getTable().size()).isNotEqualTo(0);
+        assertThat(receivedLeagueTable.getLeagueID()).isEqualTo("anyLeagueID");
+        assertThat(receivedLeagueTable.getTable().size()).isEqualTo(4);
     }
 
 }

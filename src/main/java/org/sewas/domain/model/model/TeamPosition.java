@@ -22,4 +22,12 @@ public class TeamPosition {
     public void setPoints(int points) {
         this.points = points;
     }
+
+    public void addVictory() {
+        this.points = this.points + 3;
+    }
+
+    public void addTie() {
+        this.points = this.points + 1;
+    }
 }

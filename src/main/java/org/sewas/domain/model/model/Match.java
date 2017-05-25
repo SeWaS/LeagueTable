@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by sebastian on 21/05/17.
  */
-@JsonIgnoreProperties(ignoreUnknown = false)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Match {
 
     @JsonProperty("MatchID")
@@ -28,4 +28,7 @@ public class Match {
 
     @JsonProperty("Group")
     public Group Group;
+
+    @JsonProperty("MatchResults")
+    public List<MatchResult> matchResults;
 }

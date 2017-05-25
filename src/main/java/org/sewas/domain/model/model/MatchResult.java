@@ -1,75 +1,34 @@
 package org.sewas.domain.model.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
 /**
  * Created by sebastian on 21/05/17.
  */
-public class MatchResult implements Serializable {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class MatchResult {
 
-    private int PointsTeam1;
-    private int PointsTeam2;
-    private String ResultDescription;
-    private int ResultID;
-    private String ResultName;
-    private int ResultOrderID;
-    private int ResultTypeID;
+    @JsonProperty("PointsTeam1")
+    public int PointsTeam1;
 
-    public int getPointsTeam1() {
-        return PointsTeam1;
-    }
+    @JsonProperty("PointsTeam2")
+    public int PointsTeam2;
 
-    public void setPointsTeam1(int pointsTeam1) {
-        PointsTeam1 = pointsTeam1;
-    }
+    @JsonProperty("ResultDescription")
+    public String ResultDescription;
 
-    public int getPointsTeam2() {
-        return PointsTeam2;
-    }
+    @JsonProperty("ResultID")
+    public int ResultID;
 
-    public void setPointsTeam2(int pointsTeam2) {
-        PointsTeam2 = pointsTeam2;
-    }
+    @JsonProperty("ResultName")
+    public String ResultName;
 
-    public String getResultDescription() {
-        return ResultDescription;
-    }
+    @JsonProperty("ResultOrderID")
+    public int ResultOrderID;
 
-    public void setResultDescription(String resultDescription) {
-        ResultDescription = resultDescription;
-    }
-
-    public int getResultID() {
-        return ResultID;
-    }
-
-    public void setResultID(int resultID) {
-        ResultID = resultID;
-    }
-
-    public String getResultName() {
-        return ResultName;
-    }
-
-    public void setResultName(String resultName) {
-        ResultName = resultName;
-    }
-
-    public int getResultOrderID() {
-        return ResultOrderID;
-    }
-
-    public void setResultOrderID(int resultOrderID) {
-        ResultOrderID = resultOrderID;
-    }
-
-    public int getResultTypeID() {
-        return ResultTypeID;
-    }
-
-    public void setResultTypeID(int resultTypeID) {
-        ResultTypeID = resultTypeID;
-    }
+    @JsonProperty("ResultTypeID")
+    public int ResultTypeID;
 }

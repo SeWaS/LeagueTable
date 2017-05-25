@@ -8,6 +8,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
+import static org.springframework.http.HttpMethod.GET;
+
 /**
  * Created by sebastian on 21/05/17.
  */
@@ -20,12 +22,8 @@ public class OpenLigaDBClient {
 
     public MatchDTO getMatchesForLeague(String leagueID){
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-
-        ResponseEntity<Match[]> Matches = restTemplate.exchange(this.baseUrl + leagueID, HttpMethod.GET, entity, Match[].class);
+        //ResponseEntity<Match[]> Matches = restTemplate.exchange(this.baseUrl + leagueID, GET, Match[].class);
+        ResponseEntity<Match[]> Matches = this.restTemplate.getForEntity(this.baseUrl + leagueID, Match[].class);
 
         MatchDTO matchDTO = new MatchDTO();
         matchDTO.setStatusCode(Matches.getStatusCodeValue());
