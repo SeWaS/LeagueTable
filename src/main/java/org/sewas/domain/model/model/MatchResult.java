@@ -1,12 +1,13 @@
-package org.sewas.domain.model;
+package org.sewas.domain.model.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.io.Serializable;
 
 /**
  * Created by sebastian on 21/05/17.
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class MatchResult {
+public class MatchResult implements Serializable {
 
     private int PointsTeam1;
     private int PointsTeam2;

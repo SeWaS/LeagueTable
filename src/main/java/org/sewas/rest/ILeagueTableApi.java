@@ -1,6 +1,6 @@
-package org.sewas.api;
+package org.sewas.rest;
 
-import org.sewas.domain.model.LeagueTable;
+import org.sewas.domain.model.model.LeagueTable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("api/leagueTable/")
 public interface ILeagueTableApi {
 
-    @GetMapping(path = "{leagueID}/")
+    @GetMapping(path = "{leagueID}")
     ResponseEntity<LeagueTable> getCurrentTableForLeague(String leagueID);
 
 }

@@ -1,8 +1,11 @@
 package org.sewas.rest;
 
-import org.sewas.api.ILeagueTableApi;
-import org.sewas.domain.model.LeagueTable;
+import org.sewas.domain.model.model.LeagueTable;
+import service.LeagueTableService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,9 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LeagueTableController implements ILeagueTableApi {
 
+    @Autowired
+    private LeagueTableService leagueTableService;
+
     @Override
-    public ResponseEntity<LeagueTable> getCurrentTableForLeague(String leagueID) {
-        return null;
+    public ResponseEntity<LeagueTable> getCurrentTableForLeague(@PathVariable  String leagueID) {
+        return new ResponseEntity<LeagueTable>(this.leagueTableService.returnCurrentLeagueTable(leagueID), HttpStatus.OK);
     }
 
 }
