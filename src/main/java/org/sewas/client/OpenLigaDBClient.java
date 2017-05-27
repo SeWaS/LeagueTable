@@ -2,6 +2,7 @@ package org.sewas.client;
 
 import org.sewas.domain.model.dto.MatchDTO;
 import org.sewas.domain.model.model.Match;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -18,7 +19,8 @@ public class OpenLigaDBClient {
 
     private RestTemplate restTemplate = new RestTemplate();
 
-    private String baseUrl = "https://www.openligadb.de/api/getmatchdata/";
+    @Value("${openliga.api.getmachdata}")
+    private String baseUrl;
 
     public MatchDTO getMatchesForLeague(String leagueID){
 

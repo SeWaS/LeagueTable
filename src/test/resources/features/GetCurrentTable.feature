@@ -8,7 +8,6 @@ Feature: Get current league table
     When Current league is fetched
     Then All teams have 0 points
 
-  @Pending
   Scenario: Season has one matchday
     Given "Team1" played against "Team2" 1:0
     And "Team3" played against "Team4" 2:2

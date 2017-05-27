@@ -1,12 +1,15 @@
 package org.sewas.features.util;
 
 import org.sewas.domain.model.model.LeagueTable;
+import org.sewas.domain.model.model.Match;
 import org.sewas.domain.model.model.Team;
+import org.sewas.domain.model.model.TeamPosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,18 +18,16 @@ import java.util.List;
 @Component
 public class World {
 
-    @Autowired
-    private TestRestTemplate testRestTemplate;
-
     private LeagueTable leagueTable = new LeagueTable();
     private ResponseEntity<LeagueTable> response;
-
-    public void setTableResponseEntity() {
-        this.response = this.testRestTemplate.getForEntity("/api/leagueTable/"+this.leagueTable.getLeagueID(), LeagueTable.class);
-    }
+    private List<Match> playedMatches = new ArrayList<Match>();
 
     public ResponseEntity<LeagueTable> getResponse() {
         return response;
+    }
+
+    public void setResponse(ResponseEntity<LeagueTable> response) {
+        this.response = response;
     }
 
     public void addTeams(List<String> teams) {
@@ -39,5 +40,25 @@ public class World {
 
     public void setLeagueId(String leagueID) {
         this.leagueTable.setLeagueID(leagueID);
+    }
+
+    public String getLeagueID()
+    {
+        return this.leagueTable.getLeagueID();
+    }
+
+    public List<TeamPosition> getTable()
+    {
+        return this.leagueTable.getTable();
+    }
+
+    public void addMatch(Match match)
+    {
+        this.playedMatches.add(match);
+    }
+
+    public List<Match> getMatches()
+    {
+        return this.playedMatches;
     }
 }

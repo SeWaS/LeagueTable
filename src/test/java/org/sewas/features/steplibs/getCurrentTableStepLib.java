@@ -14,6 +14,7 @@ import org.sewas.features.util.World;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = {LeagueTableApplication.class, ScenarioConfig.class})
-@AutoConfigureWireMock(port = 8999)
+@AutoConfigureWireMock(port = 1234)
 public class getCurrentTableStepLib {
 
     @Autowired
@@ -50,8 +51,8 @@ public class getCurrentTableStepLib {
     }
 
     @Given("^\"([^\"]*)\" played against \"([^\"]*)\" (\\d+):(\\d+)$")
-    public void playedAgainst(String arg0, String arg1, int arg2, int arg3) throws Throwable {
-
+    public void playedAgainst(String team1, String team2, int scoreTeam1, int scoreTeam2) {
+        this.steps.addMatch(team1, team2, scoreTeam1, scoreTeam2);
     }
 
     @Then("^\"([^\"]*)\" is on place (\\d+) with (\\d+) points$")

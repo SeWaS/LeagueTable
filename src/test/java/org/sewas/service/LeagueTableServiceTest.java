@@ -72,7 +72,7 @@ public class LeagueTableServiceTest {
                         .build())
                 .withResult(new MatchResultBuilder()
                         .withResultID(2)
-                        .withPointsForTeam1(1)
+                        .withPointsForTeam1(0)
                         .withPointsForTeam2(2)
                         .build())
                 .build();
@@ -119,17 +119,40 @@ public class LeagueTableServiceTest {
         Match[] mockMatches = new Match[]{match1, match2};
 
         this.validMockDTO.setMatches(mockMatches);
+
+        given(this.mockClient.getMatchesForLeague(any(String.class))).willReturn(this.validMockDTO);
     }
 
     @Test
-    public void leagueTableService_must_return_not_empty_LeagueTable_for_valid_client_call(){
-
-        given(this.mockClient.getMatchesForLeague(any(String.class))).willReturn(this.validMockDTO);
-
+    public void leagueTableService_must_return_not_empty_LeagueTable_for_valid_client_call()
+    {
         LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID");
 
         assertThat(receivedLeagueTable.getLeagueID()).isEqualTo("anyLeagueID");
         assertThat(receivedLeagueTable.getTable().size()).isEqualTo(4);
+    }
+
+    @Test
+    public void leagueTableService_must_calculate_correct_leagueTable()
+    {
+        LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID");
+
+        TeamPosition tp1 = receivedLeagueTable.getTable().get(0);
+        TeamPosition tp2 = receivedLeagueTable.getTable().get(1);
+        TeamPosition tp3 = receivedLeagueTable.getTable().get(2);
+        TeamPosition tp4 = receivedLeagueTable.getTable().get(3);
+
+        assertThat(tp1.getTeam().TeamId).isEqualTo(1);
+        assertThat(tp1.getPoints()).isEqualTo(0);
+
+        assertThat(tp2.getTeam().TeamId).isEqualTo(2);
+        assertThat(tp2.getPoints()).isEqualTo(3);
+
+        assertThat(tp3.getTeam().TeamId).isEqualTo(3);
+        assertThat(tp3.getPoints()).isEqualTo(1);
+
+        assertThat(tp4.getTeam().TeamId).isEqualTo(4);
+        assertThat(tp4.getPoints()).isEqualTo(1);
     }
 
 }
