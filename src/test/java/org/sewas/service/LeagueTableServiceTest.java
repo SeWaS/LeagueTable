@@ -10,10 +10,6 @@ import org.sewas.client.OpenLigaDBClient;
 import org.sewas.domain.model.dto.MatchDTO;
 import org.sewas.domain.model.model.*;
 import org.sewas.util.*;
-import service.LeagueTableService;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -32,9 +28,12 @@ public class LeagueTableServiceTest {
     private OpenLigaDBClient mockClient;
 
     MatchDTO validMockDTO;
+    ListSearch listSearch;
 
     @Before
     public void setUp(){
+        this.listSearch = new ListSearch();
+
         this.validMockDTO = new MatchDTO();
         this.validMockDTO.setStatusCode(200);
 
@@ -53,7 +52,7 @@ public class LeagueTableServiceTest {
                     .build())
                 .withGroup(new GroupBuilder()
                     .withGroupID(99)
-                    .withGroupName("NyGroupName")
+                    .withGroupName("MyGroupName")
                     .withGroupOrderID(1)
                     .build())
                 .withGoal(new GoalBuilder()
@@ -133,26 +132,35 @@ public class LeagueTableServiceTest {
     }
 
     @Test
-    public void leagueTableService_must_calculate_correct_leagueTable()
+    public void leagueTableService_must_calculate_correct_points()
     {
         LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID");
 
-        TeamPosition tp1 = receivedLeagueTable.getTable().get(0);
-        TeamPosition tp2 = receivedLeagueTable.getTable().get(1);
-        TeamPosition tp3 = receivedLeagueTable.getTable().get(2);
-        TeamPosition tp4 = receivedLeagueTable.getTable().get(3);
+        TeamPosition tp1 = this.listSearch.findTeamPositionByTeamname("HomeTeam", receivedLeagueTable);
+        TeamPosition tp2 = this.listSearch.findTeamPositionByTeamname("GuestTeam", receivedLeagueTable);
+        TeamPosition tp3 = this.listSearch.findTeamPositionByTeamname("AnotherHomeTeam", receivedLeagueTable);
+        TeamPosition tp4 = this.listSearch.findTeamPositionByTeamname("AnotherGuestTeam", receivedLeagueTable);
 
-        assertThat(tp1.getTeam().TeamId).isEqualTo(1);
         assertThat(tp1.getPoints()).isEqualTo(0);
-
-        assertThat(tp2.getTeam().TeamId).isEqualTo(2);
         assertThat(tp2.getPoints()).isEqualTo(3);
-
-        assertThat(tp3.getTeam().TeamId).isEqualTo(3);
         assertThat(tp3.getPoints()).isEqualTo(1);
-
-        assertThat(tp4.getTeam().TeamId).isEqualTo(4);
         assertThat(tp4.getPoints()).isEqualTo(1);
+    }
+
+    @Test
+    public void leagueTableService_must_calculate_correct_position()
+    {
+        LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID");
+
+        TeamPosition tp1 = this.listSearch.findTeamPositionByTeamname("HomeTeam", receivedLeagueTable);
+        TeamPosition tp2 = this.listSearch.findTeamPositionByTeamname("GuestTeam", receivedLeagueTable);
+        TeamPosition tp3 = this.listSearch.findTeamPositionByTeamname("AnotherHomeTeam", receivedLeagueTable);
+        TeamPosition tp4 = this.listSearch.findTeamPositionByTeamname("AnotherGuestTeam", receivedLeagueTable);
+
+        assertThat(tp1.getPosition()).isEqualTo(4);
+        assertThat(tp2.getPosition()).isEqualTo(1);
+        assertThat(tp3.getPosition()).isEqualTo(2);
+        assertThat(tp4.getPosition()).isEqualTo(2);
     }
 
 }

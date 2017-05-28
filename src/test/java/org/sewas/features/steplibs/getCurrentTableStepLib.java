@@ -9,6 +9,7 @@ import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import org.sewas.LeagueTableApplication;
 import org.sewas.config.ScenarioConfig;
+import org.sewas.domain.model.model.LeagueTable;
 import org.sewas.features.steplibs.stepdefs.getCurrentTableStepDef;
 import org.sewas.features.util.World;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -40,13 +42,13 @@ public class getCurrentTableStepLib {
     }
 
     @When("^Current league is fetched$")
-    public void currentLeagueIsFetched() throws JsonProcessingException {
+    public void currentLeagueIsFetched() throws IOException {
         steps.initWireMock();
         steps.requestCurrentSeason();
     }
 
-    @Then("^All teams have (\\d+) points$")
-    public void allTeamsHavePoints(int arg0) throws Throwable {
+    @Then("^No team available at leaguetable$")
+    public void allTeamsHavePoints() throws Throwable {
         steps.verifyThatAllTeamsHaveZeroPints();
     }
 
@@ -56,7 +58,12 @@ public class getCurrentTableStepLib {
     }
 
     @Then("^\"([^\"]*)\" is on place (\\d+) with (\\d+) points$")
-    public void isOnPlaceWithPoints(String arg0, int arg1, int arg2) throws Throwable {
+    public void isOnPlaceWithPoints(String teamname, int place, int points) throws Throwable {
+        this.steps.verifyThatTeamHasPoints(teamname, place, points);
+    }
 
+    @And("^\"([^\"]*)\" is on place (\\d+) with (\\d+) point$")
+    public void isOnPlaceWithPoint(String teamname, int place, int points)  {
+        this.steps.verifyThatTeamHasPoints(teamname, place, points);
     }
 }

@@ -1,7 +1,7 @@
 package org.sewas.rest;
 
 import org.sewas.domain.model.model.LeagueTable;
-import service.LeagueTableService;
+import org.sewas.service.LeagueTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class LeagueTableController implements ILeagueTableApi {
 
     @Override
     public ResponseEntity<LeagueTable> getCurrentTableForLeague(@PathVariable  String leagueID) {
-        return new ResponseEntity<LeagueTable>(this.leagueTableService.returnCurrentLeagueTable(leagueID), HttpStatus.OK);
+        return new ResponseEntity<>(this.leagueTableService.returnCurrentLeagueTable(leagueID), HttpStatus.OK);
     }
 
 }

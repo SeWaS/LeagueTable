@@ -6,6 +6,15 @@ package org.sewas.domain.model.model;
 public class TeamPosition {
     private Team team;
     private int points;
+    private int position;
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public Team getTeam() {
         return team;
