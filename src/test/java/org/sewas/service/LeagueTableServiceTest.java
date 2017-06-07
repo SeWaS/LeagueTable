@@ -2,6 +2,7 @@ package org.sewas.service;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -10,6 +11,7 @@ import org.sewas.client.OpenLigaDBClient;
 import org.sewas.domain.model.dto.MatchDTO;
 import org.sewas.domain.model.model.*;
 import org.sewas.util.*;
+import org.sewas.util.testmarker.IntegrationTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;

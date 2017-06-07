@@ -1,6 +1,5 @@
 package org.sewas.features.steplibs.stepdefs;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.sewas.domain.model.model.LeagueTable;
 import org.sewas.domain.model.model.Match;
@@ -9,9 +8,7 @@ import org.sewas.features.util.World;
 import org.sewas.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.test.web.client.MockRestServiceServer;
 
 import java.io.IOException;
 import java.util.List;

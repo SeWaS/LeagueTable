@@ -1,21 +1,15 @@
 package org.sewas.features.steplibs;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import net.thucydides.core.annotations.Steps;
 import org.sewas.LeagueTableApplication;
 import org.sewas.config.ScenarioConfig;
-import org.sewas.domain.model.model.LeagueTable;
 import org.sewas.features.steplibs.stepdefs.getCurrentTableStepDef;
-import org.sewas.features.util.World;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 import java.util.List;

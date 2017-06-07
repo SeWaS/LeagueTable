@@ -3,6 +3,7 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: "jacoco"
 apply plugin: 'net.serenity-bdd.aggregator'
 apply plugin: 'org.springframework.boot'
 
@@ -57,3 +58,21 @@ dependencies {
 }
 
 gradle.startParameter.continueOnFailure = true
+
+task runUnitTests(type: Test) {
+    exclude 'org/sewas/features/**'
+    useJUnit {
+        excludeCategories 'org.sewas.util.testmarker.IntegrationTest'
+    }
+}
+
+task runIntegrationTests(type: Test) {
+    exclude 'org/sewas/features/**'
+    useJUnit {
+        includeCategories 'org.sewas.util.testmarker.IntegrationTest'
+    }
+}
+
+task runFeatureTests(type: Test) {
+    include 'org/sewas/features/**'
+}
