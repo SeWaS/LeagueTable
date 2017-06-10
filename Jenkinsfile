@@ -33,16 +33,18 @@ pipeline {
             }
         }
         stage('Reporting') {
-            echo 'Aggregate Serenity Report'
-            sh './gradlew aggregate -no--daemon'
-            publishHTML (target: [
-                  allowMissing: false,
-                  alwaysLinkToLastBuild: true,
-                  keepAll: false,
-                  reportDir: 'target/site/serenity',
-                  reportFiles: 'index.html',
-                  reportName: "Feature Report"
-                ])
+            steps {
+                echo 'Aggregate Serenity Report'
+                sh './gradlew aggregate -no--daemon'
+                publishHTML (target: [
+                            allowMissing: false,
+                            alwaysLinkToLastBuild: true,
+                            keepAll: false,
+                            reportDir: 'target/site/serenity',
+                            reportFiles: 'index.html',
+                            reportName: "Feature Report"
+                            ])
+            }
         }
         stage('Deploy') {
             steps {
