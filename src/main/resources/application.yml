@@ -1,0 +1,3 @@
+openliga:
+  api:
+    getmachdata: "https://www.openligadb.de/api/getmatchdata/"

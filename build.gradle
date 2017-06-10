@@ -2,13 +2,92 @@ group 'org.sewas'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: "jacoco"
+apply plugin: 'net.serenity-bdd.aggregator'
+apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = 1.8
 
 repositories {
-    mavenCentral()
+    mavenLocal()
+    jcenter()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+    maven { url "http://repo.spring.io/release" }
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:1.2.2")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.0.RELEASE")
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-contract-dependencies:1.1.2.BUILD-SNAPSHOT"
+    }
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'
+    testCompile group: 'info.cukes', name: 'cucumber-java', version: '1.2.5'
+
+    testCompile group: 'net.serenity-bdd', name: 'serenity-core', version: '1.2.2'
+    testCompile group: 'net.serenity-bdd', name: 'serenity-junit', version: '1.2.2'
+    testCompile group: 'net.serenity-bdd', name: 'serenity-cucumber', version: '1.1.23'
+    testCompile group: 'net.serenity-bdd', name: 'serenity-spring', version: '1.2.2'
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '1.5.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '1.5.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.0.RELEASE'
+    compile group: 'com.h2database', name: 'h2', version: '1.3.148'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-test-autoconfigure', version: '1.5.0.RELEASE'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-test', version: '1.5.0.RELEASE'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.0.RELEASE'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '1.5.0.RELEASE'
+    testCompile group: 'org.springframework.cloud', name: 'spring-cloud-contract-wiremock'
+}
+
+gradle.startParameter.continueOnFailure = true
+
+task runUnitTests(type: Test) {
+    exclude 'org/sewas/features/**'
+    useJUnit {
+        excludeCategories 'org.sewas.util.testmarker.IntegrationTest'
+    }
+}
+
+task runIntegrationTests(type: Test) {
+    exclude 'org/sewas/features/**'
+    useJUnit {
+        includeCategories 'org.sewas.util.testmarker.IntegrationTest'
+    }
+}
+
+task runFeatureTests(type: Test) {
+    include 'org/sewas/features/**'
+}
+
+task unitTestReport(type: JacocoReport){
+    executionData runUnitTests
+    sourceSets sourceSets.main
+}
+
+task integrationTestReport(type: JacocoReport){
+    executionData runIntegrationTests
+    sourceSets sourceSets.main
+}
+
+task unitAndITcoverageReport(type: JacocoReport) {
+    executionData runUnitTests, runIntegrationTests
+    sourceSets sourceSets.main
 }
