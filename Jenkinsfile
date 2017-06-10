@@ -40,7 +40,7 @@ pipeline {
                             allowMissing: false,
                             alwaysLinkToLastBuild: true,
                             keepAll: false,
-                            reportDir: 'target/site/serenity/**',
+                            reportDir: 'target/site/serenity/',
                             reportFiles: 'index.html',
                             reportName: "Feature Report"
                             ])
