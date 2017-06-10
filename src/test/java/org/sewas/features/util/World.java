@@ -30,9 +30,12 @@ public class World {
 
     public void addTeams(List<String> teams) {
         for (String teamname : teams) {
+            TeamPosition tp = new TeamPosition();
+
             Team t = new Team();
             t.TeamName = teamname;
-            this.leagueTable.addTeam(t);
+
+            tp.setTeam(t);
         }
     }
 

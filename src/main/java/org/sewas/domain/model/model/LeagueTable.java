@@ -26,13 +26,6 @@ public class LeagueTable {
         this.leagueID = leagueID;
     }
 
-    public void addTeam(Team t) {
-        TeamPosition tp = new TeamPosition();
-        tp.setPoints(0);
-        tp.setTeam(t);
-        this.table.add(tp);
-    }
-
     public void addTeamPosition(TeamPosition tp)
     {
         this.table.add(tp);
