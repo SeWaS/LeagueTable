@@ -34,6 +34,39 @@ pipeline {
         }
         stage('Reporting') {
             steps {
+                echo 'Generate Unittest Coverage report'
+                sh './gradlew unitTestReport'
+                publishHTML (target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'build/reports/jacoco/unitTestReport/html',
+                    reportFiles: 'index.html',
+                    reportName: "Unittest Coverage"
+                ])
+
+                echo 'Generate Integrationtest Coverage report'
+                sh './gradlew integrationTestReport'
+                publishHTML (target: [
+                                    allowMissing: false,
+                                    alwaysLinkToLastBuild: true,
+                                    keepAll: true,
+                                    reportDir: 'build/reports/jacoco/integrationTestReport/html',
+                                    reportFiles: 'index.html',
+                                    reportName: "Integrationtest Coverage"
+                                ])
+
+                echo 'Generate Unit and IT COverage report'
+                sh './gradlew unitAndITcoverageReport'
+                publishHTML (target: [
+                                    allowMissing: false,
+                                    alwaysLinkToLastBuild: true,
+                                    keepAll: true,
+                                    reportDir: 'build/reports/jacoco/unitAndITcoverageReport/html',
+                                    reportFiles: 'index.html',
+                                    reportName: "Unit and IT Coverage"
+                                ])
+
                 echo 'Aggregate Serenity Report'
                 sh './gradlew aggregate'
                 publishHTML (target: [

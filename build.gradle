@@ -76,3 +76,18 @@ task runIntegrationTests(type: Test) {
 task runFeatureTests(type: Test) {
     include 'org/sewas/features/**'
 }
+
+task unitTestReport(type: JacocoReport){
+    executionData runUnitTests
+    sourceSets sourceSets.main
+}
+
+task integrationTestReport(type: JacocoReport){
+    executionData runIntegrationTests
+    sourceSets sourceSets.main
+}
+
+task unitAndITcoverageReport(type: JacocoReport) {
+    executionData runUnitTests, runIntegrationTests
+    sourceSets sourceSets.main
+}
