@@ -23,7 +23,7 @@ pipeline {
         stage('Integration Tests') {
             steps {
                 echo 'Start IntegrationTests'
-                sh './gradlew runUnitTests'
+                sh './gradlew runIntegrationTests'
             }
         }
         stage('Acceptance Tests') {
@@ -35,7 +35,7 @@ pipeline {
         stage('Reporting') {
             steps {
                 echo 'Aggregate Serenity Report'
-                sh './gradlew aggregate -no--daemon'
+                sh './gradlew aggregate'
                 publishHTML (target: [
                             allowMissing: false,
                             alwaysLinkToLastBuild: true,
