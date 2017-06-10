@@ -11,7 +11,7 @@ pipeline {
         stage('Build java') {
             steps {
                 echo 'Building..'
-                sh './gradlew clean build -x --no-deamon'
+                sh './gradlew clean build -x test --no-deamon'
             }
         }
         stage('Test') {
