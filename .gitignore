@@ -26,5 +26,4 @@ proguard/
 build/
 bin/
 .gradle
-/gradle/
 /target/site/serenity/
