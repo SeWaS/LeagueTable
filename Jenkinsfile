@@ -14,11 +14,35 @@ pipeline {
                 sh './gradlew clean build -x test --no-daemon'
             }
         }
-        stage('Test') {
+        stage('Unit Tests') {
             steps {
-                echo 'Testing..'
+                echo 'Start Unittests'
                 sh './gradlew runUnitTests'
             }
+        }
+        stage('Integration Tests') {
+            steps {
+                echo 'Start IntegrationTests'
+                sh './gradlew runUnitTests'
+            }
+        }
+        stage('Acceptance Tests') {
+            steps {
+                echo 'Start AcceptanceTests'
+                sh './gradlew runFeatureTests'
+            }
+        }
+        stage('Reporting') {
+            echo 'Aggregate Serenity Report'
+            sh './gradlew aggregate -no--daemon'
+            publishHTML (target: [
+                  allowMissing: false,
+                  alwaysLinkToLastBuild: true,
+                  keepAll: false,
+                  reportDir: 'target/site/serenity',
+                  reportFiles: 'index.html',
+                  reportName: "Feature Report"
+                ])
         }
         stage('Deploy') {
             steps {
