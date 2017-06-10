@@ -117,7 +117,50 @@ public class LeagueTableServiceTest {
                     .build())
                 .build();
 
-        Match[] mockMatches = new Match[]{match1, match2};
+        Match match3 = new MatchBuilder()
+                .withMatchID(125)
+                .withNumberOfViewers(99000)
+                .withTeam1(new TeamBuilder()
+                        .withTeamId(5)
+                        .withTeamName("WinningHomeTeam")
+                        .withTeamIcon("Icon.gif")
+                        .build())
+                .withTeam2(new TeamBuilder()
+                        .withTeamId(6)
+                        .withTeamName("LosingGuestTeam")
+                        .withTeamIcon("logingGuestTeamIcon.png")
+                        .build())
+                .withGroup(new GroupBuilder()
+                        .withGroupID(99)
+                        .withGroupName("NyGroupName")
+                        .withGroupOrderID(1)
+                        .build())
+                .withGoal(new GoalBuilder()
+                        .withScoreTeam1(1)
+                        .withScoreTeam2(0)
+                        .isPenalty(true)
+                        .build())
+                .withGoal(new GoalBuilder()
+                        .withScoreTeam1(1)
+                        .withScoreTeam2(1)
+                        .build())
+                .withGoal(new GoalBuilder()
+                        .withScoreTeam1(2)
+                        .withScoreTeam2(1)
+                        .build())
+                .withResult(new MatchResultBuilder()
+                        .withResultID(1)
+                        .withPointsForTeam1(0)
+                        .withPointsForTeam2(0)
+                        .build())
+                .withResult(new MatchResultBuilder()
+                        .withResultID(2)
+                        .withPointsForTeam1(2)
+                        .withPointsForTeam2(1)
+                        .build())
+                .build();
+
+        Match[] mockMatches = new Match[]{match1, match2, match3};
 
         this.validMockDTO.setMatches(mockMatches);
 
@@ -130,7 +173,7 @@ public class LeagueTableServiceTest {
         LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID");
 
         assertThat(receivedLeagueTable.getLeagueID()).isEqualTo("anyLeagueID");
-        assertThat(receivedLeagueTable.getTable().size()).isEqualTo(4);
+        assertThat(receivedLeagueTable.getTable().size()).isEqualTo(6);
     }
 
     @Test
@@ -142,11 +185,15 @@ public class LeagueTableServiceTest {
         TeamPosition tp2 = this.listSearch.findTeamPositionByTeamname("GuestTeam", receivedLeagueTable);
         TeamPosition tp3 = this.listSearch.findTeamPositionByTeamname("AnotherHomeTeam", receivedLeagueTable);
         TeamPosition tp4 = this.listSearch.findTeamPositionByTeamname("AnotherGuestTeam", receivedLeagueTable);
+        TeamPosition tp5 = this.listSearch.findTeamPositionByTeamname("WinningHomeTeam", receivedLeagueTable);
+        TeamPosition tp6 = this.listSearch.findTeamPositionByTeamname("LosingGuestTeam", receivedLeagueTable);
 
         assertThat(tp1.getPoints()).isEqualTo(0);
         assertThat(tp2.getPoints()).isEqualTo(3);
         assertThat(tp3.getPoints()).isEqualTo(1);
         assertThat(tp4.getPoints()).isEqualTo(1);
+        assertThat(tp5.getPoints()).isEqualTo(3);
+        assertThat(tp6.getPoints()).isEqualTo(0);
     }
 
     @Test
@@ -158,11 +205,14 @@ public class LeagueTableServiceTest {
         TeamPosition tp2 = this.listSearch.findTeamPositionByTeamname("GuestTeam", receivedLeagueTable);
         TeamPosition tp3 = this.listSearch.findTeamPositionByTeamname("AnotherHomeTeam", receivedLeagueTable);
         TeamPosition tp4 = this.listSearch.findTeamPositionByTeamname("AnotherGuestTeam", receivedLeagueTable);
+        TeamPosition tp5 = this.listSearch.findTeamPositionByTeamname("WinningHomeTeam", receivedLeagueTable);
+        TeamPosition tp6 = this.listSearch.findTeamPositionByTeamname("LosingGuestTeam", receivedLeagueTable);
 
-        assertThat(tp1.getPosition()).isEqualTo(4);
+        assertThat(tp1.getPosition()).isEqualTo(5);
         assertThat(tp2.getPosition()).isEqualTo(1);
-        assertThat(tp3.getPosition()).isEqualTo(2);
-        assertThat(tp4.getPosition()).isEqualTo(2);
+        assertThat(tp3.getPosition()).isEqualTo(3);
+        assertThat(tp4.getPosition()).isEqualTo(3);
+        assertThat(tp5.getPosition()).isEqualTo(1);
+        assertThat(tp6.getPosition()).isEqualTo(5);
     }
-
 }
