@@ -99,7 +99,7 @@ node {
     stage('Deploy...') {
         if(env.BRANCH_NAME == 'develop') {
             echo '================ Pusing to GutHub ================='
-            sh 'git push origin develop'
+            sh 'git push'
         }
     }
 }
