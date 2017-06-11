@@ -36,7 +36,7 @@ public class LeagueTableControllerTest {
     private LeagueTableService leagueTableService;
 
     @Test
-    public void test() throws Exception {
+    public void shouldReturnOkIfLeagueIdWasGiven() throws Exception {
         given(this.leagueTableService.returnCurrentLeagueTable(anyString())).willReturn(new LeagueTable());
 
         this.mockMvc.perform(get("/api/leagueTable/1234").accept(MediaType.APPLICATION_JSON))

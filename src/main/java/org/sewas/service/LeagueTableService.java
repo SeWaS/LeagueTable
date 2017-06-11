@@ -1,15 +1,12 @@
 package org.sewas.service;
 
 import org.sewas.client.OpenLigaDBClient;
-import org.sewas.domain.model.dto.MatchDTO;
+import org.sewas.rest.dto.MatchDTO;
 import org.sewas.domain.model.model.LeagueTable;
 import org.sewas.domain.model.model.Match;
 import org.sewas.domain.model.model.TeamPosition;
-import org.sewas.util.TeamPositionComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Collections;
 
 /**
  * Created by sebastian on 21/05/17.

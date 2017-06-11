@@ -20,7 +20,7 @@ public class ClientTestConfig {
     }
 
     @Bean
-    public MockRestServiceServer mockServer(RestTemplate restTemplate)
+    public MockRestServiceServer server(RestTemplate restTemplate)
     {
         return MockRestServiceServer.createServer(restTemplate);
     }

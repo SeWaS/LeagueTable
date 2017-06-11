@@ -1,13 +1,12 @@
 package org.sewas.client;
 
-import org.sewas.domain.model.dto.MatchDTO;
+import org.sewas.rest.dto.MatchDTO;
 import org.sewas.domain.model.model.Match;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
@@ -33,7 +32,6 @@ public class OpenLigaDBClient {
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 
         ResponseEntity<Match[]> Matches = restTemplate.exchange(this.baseUrl + leagueID, GET, entity, Match[].class);
-        //ResponseEntity<Match[]> Matches = this.restTemplate.getForEntity(this.baseUrl + leagueID, Match[].class);
 
         MatchDTO matchDTO = new MatchDTO();
         matchDTO.setStatusCode(Matches.getStatusCodeValue());
