@@ -96,8 +96,9 @@ pipeline {
 */
 
 node {
-    stage 'Deploy...'
-    if(env.BRANCH_NAME == 'develop') {
-                        echo 'Yes, we are on develop'
-                    }
+    stage('Deploy...') {
+        if(env.BRANCH_NAME == 'develop') {
+            echo 'Yes, we are on develop'
+        }
+    }
 }
