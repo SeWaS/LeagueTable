@@ -1,4 +1,3 @@
-/*
 pipeline {
     agent any
 
@@ -90,16 +89,6 @@ pipeline {
                     echo 'Yes, we are on develop'
                 }
             }
-        }
-    }
-}
-*/
-
-node {
-    stage('Deploy...') {
-        if(env.BRANCH_NAME == 'develop') {
-            echo '================ Pusing to GutHub ================='
-            sh 'git push origin HEAD:develop'
         }
     }
 }
