@@ -82,7 +82,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                echo ${GIT_LOCAL_BRANCH}
+                echo env.BRANCH_NAME
             }
         }
     }
