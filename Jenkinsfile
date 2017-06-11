@@ -84,10 +84,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-
-                if(env.BRANCH_NAME == 'develop') {
-                    echo 'Yes, we are on develop'
-                }
             }
         }
     }
