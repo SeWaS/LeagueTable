@@ -1,5 +1,6 @@
 package org.sewas.features.steplibs;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -59,5 +60,11 @@ public class getCurrentTableStepLib {
     @And("^\"([^\"]*)\" is on place (\\d+) with (\\d+) point$")
     public void isOnPlaceWithPoint(String teamname, int place, int points)  {
         this.steps.verifyThatTeamHasPoints(teamname, place, points);
+    }
+
+    @Given("^\"([^\"]*)\" played against \"([^\"]*)\" (\\d+):(\\d+) on matchday (\\d+)$")
+    public void playedAgainstOnMatchday(String arg0, String arg1, int arg2, int arg3, int arg4) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
     }
 }
