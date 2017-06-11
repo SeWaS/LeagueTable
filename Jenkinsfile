@@ -1,8 +1,8 @@
 pipeline {
     agent any
-
+/*
     stages {
-    /*
+
         stage('Init') {
             steps {
                 echo 'Init gradle wrapper'
@@ -80,13 +80,22 @@ pipeline {
                             ])
             }
         }
-        */
+
         stage('Deploy') {
             steps {
+                echo 'Deploying....'
+
                 if(env.BRANCH_NAME == 'develop') {
                     echo 'Yes, we are on develop'
                 }
             }
         }
     }
+    */
+    stage 'Deploy'
+    echo 'Deploying....'
+
+                    if(env.BRANCH_NAME == 'develop') {
+                        echo 'Yes, we are on develop'
+                    }
 }
