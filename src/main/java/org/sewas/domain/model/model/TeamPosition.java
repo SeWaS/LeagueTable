@@ -28,10 +28,6 @@ public class TeamPosition {
         return points;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
     public void addVictory() {
         this.points = this.points + 3;
     }

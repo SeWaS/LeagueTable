@@ -1,4 +1,4 @@
-package org.sewas.domain.model.dto;
+package org.sewas.rest.dto;
 
 import org.sewas.domain.model.model.Match;
 
