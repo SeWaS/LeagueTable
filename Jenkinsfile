@@ -1,6 +1,7 @@
+/*
 pipeline {
     agent any
-/*
+
     stages {
 
         stage('Init') {
@@ -91,11 +92,12 @@ pipeline {
             }
         }
     }
-    */
-    stage 'Deploy'
-    echo 'Deploying....'
+}
+*/
 
-                    if(env.BRANCH_NAME == 'develop') {
+node {
+    stage 'Deploy...'
+    if(env.BRANCH_NAME == 'develop') {
                         echo 'Yes, we are on develop'
                     }
 }
