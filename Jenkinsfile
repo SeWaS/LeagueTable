@@ -98,7 +98,8 @@ pipeline {
 node {
     stage('Deploy...') {
         if(env.BRANCH_NAME == 'develop') {
-            echo 'Yes, we are on develop'
+            echo '================ Pusing to GutHub ================='
+            sh 'git push origin develop'
         }
     }
 }
