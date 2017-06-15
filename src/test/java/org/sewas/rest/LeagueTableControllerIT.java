@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.sewas.domain.model.model.LeagueTable;
+import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.service.LeagueTableService;
 import org.sewas.util.testmarker.IntegrationTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +36,22 @@ public class LeagueTableControllerIT {
     @MockBean
     private LeagueTableService leagueTableService;
 
-    @Test
+    @Test // 200
     public void shouldReturnOkIfLeagueIdWasGiven() throws Exception {
         given(this.leagueTableService.returnCurrentLeagueTable(anyString(), anyString())).willReturn(new LeagueTable());
 
         this.mockMvc.perform(get("/api/leagueTable/1234/2016").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+
+        verify(this.leagueTableService, times(1)).returnCurrentLeagueTable("1234", "2016");
+    }
+
+    @Test
+    public void shouldReturnNotFoundExceptionIfNoMatchesReturn() throws Exception {
+        given(this.leagueTableService.returnCurrentLeagueTable(anyString(), anyString())).willThrow(SeasonNotAvailableException.class);
+
+        this.mockMvc.perform(get("/api/leagueTable/1234/2016").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
 
         verify(this.leagueTableService, times(1)).returnCurrentLeagueTable("1234", "2016");
     }

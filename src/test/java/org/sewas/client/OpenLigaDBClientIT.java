@@ -8,6 +8,7 @@ import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.sewas.config.ClientTestConfig;
 import org.sewas.domain.model.model.Match;
+import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.rest.dto.MatchDTO;
 import org.sewas.util.testmarker.IntegrationTest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,7 @@ public class OpenLigaDBClientIT {
     }
 
     @Test
-    public void shouldReturnMatchDTOForExistingLeague() throws JsonProcessingException {
+    public void shouldReturnMatchDTOForExistingLeague() throws JsonProcessingException, SeasonNotAvailableException {
 
         Match[] responseMatches = {new Match(), new Match(), new Match()};
 
@@ -60,8 +61,8 @@ public class OpenLigaDBClientIT {
         assertThat(result.getMatches()).hasSize(3);
     }
 
-    @Test
-    public void shouldReturnMatchDTOForNonExistingLeague() throws JsonProcessingException {
+    @Test(expected = SeasonNotAvailableException.class)
+    public void shouldThrowExceptionIfNoMatchesForSeasonFound() throws JsonProcessingException, SeasonNotAvailableException {
 
         Match[] responseMatches = {};
 
@@ -69,8 +70,5 @@ public class OpenLigaDBClientIT {
                 .andRespond(withSuccess(o.writeValueAsString(responseMatches), MediaType.APPLICATION_JSON));
 
         MatchDTO result = this.openLigaDBClient.getMatchesForLeague("nonExistingLeague", "anyYear");
-
-        assertThat(result.getStatusCode()).isEqualTo(200);
-        assertThat(result.getMatches()).hasSize(0);
     }
 }

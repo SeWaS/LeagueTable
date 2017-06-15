@@ -1,6 +1,7 @@
 package org.sewas.rest;
 
 import org.sewas.domain.model.model.LeagueTable;
+import org.sewas.exception.SeasonNotAvailableException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface ILeagueTableApi {
 
     @GetMapping(path = "{leagueID}/{season}")
-    ResponseEntity<LeagueTable> getCurrentTableForLeague(String leagueID, String season);
+    ResponseEntity<LeagueTable> getCurrentTableForLeague(String leagueID, String season) throws SeasonNotAvailableException;
 
 }

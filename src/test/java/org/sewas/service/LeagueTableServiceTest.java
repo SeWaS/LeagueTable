@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.sewas.client.OpenLigaDBClient;
+import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.rest.dto.MatchDTO;
 import org.sewas.domain.model.model.*;
 import org.sewas.util.*;
@@ -37,7 +38,7 @@ public class LeagueTableServiceTest {
     }
 
     @Test
-    public void shouldAddThreePointsToHomeTeamAtFirstGame() {
+    public void shouldAddThreePointsToHomeTeamAtFirstGame() throws SeasonNotAvailableException {
 
         // given
         Match mockMatch = new MatchBuilder()
@@ -77,7 +78,7 @@ public class LeagueTableServiceTest {
     }
 
     @Test
-    public void shouldAddThreePointsToGuestTeamAtFirstGame() {
+    public void shouldAddThreePointsToGuestTeamAtFirstGame() throws SeasonNotAvailableException {
 
         // given
         Match mockMatch = new MatchBuilder()
@@ -117,7 +118,7 @@ public class LeagueTableServiceTest {
     }
 
     @Test
-    public void shouldAddOnePointToBothTeamsAtFirstGame() {
+    public void shouldAddOnePointToBothTeamsAtFirstGame() throws SeasonNotAvailableException {
 
         // given
         Match mockMatch = new MatchBuilder()
@@ -157,7 +158,7 @@ public class LeagueTableServiceTest {
     }
 
     @Test
-    public void shouldAddSixPointsToHomeTeamAtTwoGames() {
+    public void shouldAddSixPointsToHomeTeamAtTwoGames() throws SeasonNotAvailableException {
 
         // given
         Match mockMatch1 = new MatchBuilder()
