@@ -1,5 +1,6 @@
 package org.sewas.config;
 
+import org.sewas.OpenLigaDBConfig;
 import org.sewas.client.OpenLigaDBClient;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -23,5 +24,10 @@ public class ClientTestConfig {
     public MockRestServiceServer server(RestTemplate restTemplate)
     {
         return MockRestServiceServer.createServer(restTemplate);
+    }
+
+    @Bean
+    public OpenLigaDBConfig openLigaDBConfig() {
+        return new OpenLigaDBConfig();
     }
 }

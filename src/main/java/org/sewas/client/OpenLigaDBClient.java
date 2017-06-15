@@ -1,5 +1,6 @@
 package org.sewas.client;
 
+import org.sewas.OpenLigaDBConfig;
 import org.sewas.rest.dto.MatchDTO;
 import org.sewas.domain.model.model.Match;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,13 @@ public class OpenLigaDBClient {
     @Autowired
     private RestOperations restTemplate;
 
+    /*
     @Value("${openliga.api.getmachdata}")
     private String baseUrl;
+    */
+
+    @Autowired
+    private OpenLigaDBConfig openLigaDBConfig;
 
     public MatchDTO getMatchesForLeague(String leagueID){
 
@@ -31,7 +37,9 @@ public class OpenLigaDBClient {
 
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 
-        ResponseEntity<Match[]> Matches = restTemplate.exchange(this.baseUrl + leagueID, GET, entity, Match[].class);
+        String url = this.openLigaDBConfig.getGetmachdata() + leagueID;
+
+        ResponseEntity<Match[]> Matches = restTemplate.exchange(url, GET, entity, Match[].class);
 
         MatchDTO matchDTO = new MatchDTO();
         matchDTO.setStatusCode(Matches.getStatusCodeValue());
