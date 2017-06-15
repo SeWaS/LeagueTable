@@ -37,11 +37,11 @@ public class LeagueTableControllerIT {
 
     @Test
     public void shouldReturnOkIfLeagueIdWasGiven() throws Exception {
-        given(this.leagueTableService.returnCurrentLeagueTable(anyString())).willReturn(new LeagueTable());
+        given(this.leagueTableService.returnCurrentLeagueTable(anyString(), anyString())).willReturn(new LeagueTable());
 
-        this.mockMvc.perform(get("/api/leagueTable/1234").accept(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(get("/api/leagueTable/1234/2016").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        verify(this.leagueTableService, times(1)).returnCurrentLeagueTable("1234");
+        verify(this.leagueTableService, times(1)).returnCurrentLeagueTable("1234", "2016");
     }
 }

@@ -18,8 +18,8 @@ public class LeagueTableController implements ILeagueTableApi {
     private LeagueTableService leagueTableService;
 
     @Override
-    public ResponseEntity<LeagueTable> getCurrentTableForLeague(@PathVariable  String leagueID) {
-        return new ResponseEntity<>(this.leagueTableService.returnCurrentLeagueTable(leagueID), HttpStatus.OK);
+    public ResponseEntity<LeagueTable> getCurrentTableForLeague(@PathVariable  String leagueID, @PathVariable String season) {
+        return new ResponseEntity<>(this.leagueTableService.returnCurrentLeagueTable(leagueID, season), HttpStatus.OK);
     }
 
 }

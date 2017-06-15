@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Year;
 import java.util.Arrays;
+import java.util.Calendar;
 
 import static org.springframework.http.HttpMethod.GET;
 
@@ -26,14 +28,14 @@ public class OpenLigaDBClient {
     @Autowired
     private OpenLigaDBConfig openLigaDBConfig;
 
-    public MatchDTO getMatchesForLeague(String leagueID){
+    public MatchDTO getMatchesForLeague(String leagueID, String season){
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 
-        String url = this.openLigaDBConfig.getGetmachdata() + leagueID;
+        String url = this.openLigaDBConfig.getGetmachdata() + leagueID + "/" + season;
 
         ResponseEntity<Match[]> Matches = restTemplate.exchange(url, GET, entity, Match[].class);
 

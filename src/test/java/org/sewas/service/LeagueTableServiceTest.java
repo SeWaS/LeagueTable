@@ -60,10 +60,10 @@ public class LeagueTableServiceTest {
         MatchDTO mockMatchDto = new MatchDTO();
         mockMatchDto.setMatches(new Match[] {mockMatch});
 
-        given(this.mockClient.getMatchesForLeague(anyString())).willReturn(mockMatchDto);
+        given(this.mockClient.getMatchesForLeague(anyString(), anyString())).willReturn(mockMatchDto);
 
         // when
-        LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID");
+        LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID", "anyYear");
 
         TeamPosition tp1 = this.listSearch.findTeamPositionByTeamname("HomeTeam", receivedLeagueTable);
         TeamPosition tp2 = this.listSearch.findTeamPositionByTeamname("GuestTeam", receivedLeagueTable);
@@ -100,10 +100,10 @@ public class LeagueTableServiceTest {
         MatchDTO mockMatchDto = new MatchDTO();
         mockMatchDto.setMatches(new Match[] {mockMatch});
 
-        given(this.mockClient.getMatchesForLeague(anyString())).willReturn(mockMatchDto);
+        given(this.mockClient.getMatchesForLeague(anyString(), anyString())).willReturn(mockMatchDto);
 
         // when
-        LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID");
+        LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID", "anyYear");
 
         TeamPosition tp1 = this.listSearch.findTeamPositionByTeamname("HomeTeam", receivedLeagueTable);
         TeamPosition tp2 = this.listSearch.findTeamPositionByTeamname("GuestTeam", receivedLeagueTable);
@@ -140,10 +140,10 @@ public class LeagueTableServiceTest {
         MatchDTO mockMatchDto = new MatchDTO();
         mockMatchDto.setMatches(new Match[] {mockMatch});
 
-        given(this.mockClient.getMatchesForLeague(anyString())).willReturn(mockMatchDto);
+        given(this.mockClient.getMatchesForLeague(anyString(), anyString())).willReturn(mockMatchDto);
 
         // when
-        LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID");
+        LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID", "anyYear");
 
         TeamPosition tp1 = this.listSearch.findTeamPositionByTeamname("HomeTeam", receivedLeagueTable);
         TeamPosition tp2 = this.listSearch.findTeamPositionByTeamname("GuestTeam", receivedLeagueTable);
@@ -197,10 +197,10 @@ public class LeagueTableServiceTest {
         MatchDTO mockMatchDto = new MatchDTO();
         mockMatchDto.setMatches(new Match[] {mockMatch1, mockMatch2});
 
-        given(this.mockClient.getMatchesForLeague(anyString())).willReturn(mockMatchDto);
+        given(this.mockClient.getMatchesForLeague(anyString(), anyString())).willReturn(mockMatchDto);
 
         // when
-        LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID");
+        LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID", "anyYear");
 
         TeamPosition tp1 = this.listSearch.findTeamPositionByTeamname("HomeTeam", receivedLeagueTable);
         TeamPosition tp2 = this.listSearch.findTeamPositionByTeamname("GuestTeam", receivedLeagueTable);

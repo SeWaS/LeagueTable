@@ -17,9 +17,9 @@ public class LeagueTableService {
     @Autowired
     private OpenLigaDBClient openLigaDBClient;
 
-    public LeagueTable returnCurrentLeagueTable(String leagueID){
+    public LeagueTable returnCurrentLeagueTable(String leagueID, String season){
 
-        MatchDTO matchesDTO = this.openLigaDBClient.getMatchesForLeague(leagueID);
+        MatchDTO matchesDTO = this.openLigaDBClient.getMatchesForLeague(leagueID, season);
 
         LeagueTable lt = new LeagueTable();
         lt.setLeagueID(leagueID);

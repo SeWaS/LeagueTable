@@ -51,10 +51,10 @@ public class OpenLigaDBClientIT {
 
         Match[] responseMatches = {new Match(), new Match(), new Match()};
 
-        this.server.expect(requestTo("http://localhost:1234/api/getmatchdata/myLeague"))
+        this.server.expect(requestTo("http://localhost:1234/api/getmatchdata/myLeague/anySeason"))
                 .andRespond(withSuccess(o.writeValueAsString(responseMatches), MediaType.APPLICATION_JSON));
 
-        MatchDTO result = this.openLigaDBClient.getMatchesForLeague("myLeague");
+        MatchDTO result = this.openLigaDBClient.getMatchesForLeague("myLeague", "anySeason");
 
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getMatches()).hasSize(3);
@@ -65,10 +65,10 @@ public class OpenLigaDBClientIT {
 
         Match[] responseMatches = {};
 
-        this.server.expect(requestTo("http://localhost:1234/api/getmatchdata/nonExistingLeague"))
+        this.server.expect(requestTo("http://localhost:1234/api/getmatchdata/nonExistingLeague/anyYear"))
                 .andRespond(withSuccess(o.writeValueAsString(responseMatches), MediaType.APPLICATION_JSON));
 
-        MatchDTO result = this.openLigaDBClient.getMatchesForLeague("nonExistingLeague");
+        MatchDTO result = this.openLigaDBClient.getMatchesForLeague("nonExistingLeague", "anyYear");
 
         assertThat(result.getStatusCode()).isEqualTo(200);
         assertThat(result.getMatches()).hasSize(0);

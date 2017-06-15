@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("api/leagueTable/")
 public interface ILeagueTableApi {
 
-    @GetMapping(path = "{leagueID}")
-    ResponseEntity<LeagueTable> getCurrentTableForLeague(String leagueID);
+    @GetMapping(path = "{leagueID}/{season}")
+    ResponseEntity<LeagueTable> getCurrentTableForLeague(String leagueID, String season);
 
 }

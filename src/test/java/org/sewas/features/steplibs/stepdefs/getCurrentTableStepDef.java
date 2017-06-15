@@ -33,7 +33,7 @@ public class getCurrentTableStepDef
 
     public void requestCurrentSeason()
     {
-        this.world.setResponse(this.testRestTemplate.getForEntity("/api/leagueTable/"+this.world.getLeagueID(), LeagueTable.class));
+        this.world.setResponse(this.testRestTemplate.getForEntity("/api/leagueTable/"+this.world.getLeagueID()+"/2016", LeagueTable.class));
     }
 
     public void verifyThatAllTeamsHaveZeroPints()
@@ -59,7 +59,7 @@ public class getCurrentTableStepDef
 
         String stubJson = objectMapper.writeValueAsString(this.world.getMatches());
 
-        stubFor(get(urlEqualTo("/api/getmatchdata/"+this.world.getLeagueID()))
+        stubFor(get(urlEqualTo("/api/getmatchdata/"+this.world.getLeagueID()+"/2016"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withBody(stubJson)));
