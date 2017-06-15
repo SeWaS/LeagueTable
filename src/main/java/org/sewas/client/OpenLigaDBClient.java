@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
@@ -20,12 +21,7 @@ import static org.springframework.http.HttpMethod.GET;
 public class OpenLigaDBClient {
 
     @Autowired
-    private RestOperations restTemplate;
-
-    /*
-    @Value("${openliga.api.getmachdata}")
-    private String baseUrl;
-    */
+    private RestTemplate restTemplate;
 
     @Autowired
     private OpenLigaDBConfig openLigaDBConfig;

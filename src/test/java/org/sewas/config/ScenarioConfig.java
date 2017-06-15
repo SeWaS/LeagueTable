@@ -31,7 +31,7 @@ public class ScenarioConfig {
     }
 
     @Bean
-    public RestOperations restTemplate() {
+    public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate();
 
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
