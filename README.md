@@ -4,7 +4,7 @@ A spring servie that provides endpoints for fetching a soccer league's table bas
 
 ## Endpoints:
 
-### /api/leagueTable/bl1
+### /api/leagueTable/bl1/2016
 *Returns the current table of league with identifier "bl1".*
 
 ## Starting application:
