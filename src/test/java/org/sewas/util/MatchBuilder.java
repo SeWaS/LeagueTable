@@ -1,7 +1,6 @@
 package org.sewas.util;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.sewas.domain.model.model.*;
+import org.sewas.domain.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +10,11 @@ import java.util.List;
  */
 public class MatchBuilder {
     private int MatchID;
-    private List<Goal> Goal = new ArrayList<Goal>();
+    private List<org.sewas.domain.model.Goal> Goal = new ArrayList<Goal>();
     private Team Team1;
     private Team Team2;
     private int NumberOfViewers;
-    private Group Group;
+    private org.sewas.domain.model.Group Group;
     private List<MatchResult> matchResults = new ArrayList<MatchResult>();
 
     public MatchBuilder()

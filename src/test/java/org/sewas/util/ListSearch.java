@@ -1,9 +1,7 @@
 package org.sewas.util;
 
-import org.sewas.domain.model.model.LeagueTable;
-import org.sewas.domain.model.model.TeamPosition;
-
-import java.util.List;
+import org.sewas.domain.model.LeagueTable;
+import org.sewas.domain.model.TeamPosition;
 
 /**
  * Created by sebastian on 28/05/17.

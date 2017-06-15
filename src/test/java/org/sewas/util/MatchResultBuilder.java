@@ -1,7 +1,7 @@
 package org.sewas.util;
 
 
-import org.sewas.domain.model.model.MatchResult;
+import org.sewas.domain.model.MatchResult;
 
 /**
  * Created by sebastian on 26/05/17.

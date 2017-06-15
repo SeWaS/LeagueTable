@@ -1,6 +1,6 @@
 package org.sewas.util;
 
-import org.sewas.domain.model.model.Goal;
+import org.sewas.domain.model.Goal;
 
 /**
  * Created by sebastian on 25/05/17.

@@ -1,4 +1,4 @@
-package org.sewas.domain.model.model;
+package org.sewas.domain.model;
 
 /**
  * Created by sebastian on 22/05/17.

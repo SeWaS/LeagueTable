@@ -1,9 +1,8 @@
 package org.sewas.features.util;
 
-import org.sewas.domain.model.model.LeagueTable;
-import org.sewas.domain.model.model.Match;
-import org.sewas.domain.model.model.Team;
-import org.sewas.domain.model.model.TeamPosition;
+import org.sewas.domain.model.LeagueTable;
+import org.sewas.domain.model.Match;
+import org.sewas.domain.model.TeamPosition;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 

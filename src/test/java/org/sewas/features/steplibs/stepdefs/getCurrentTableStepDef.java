@@ -1,9 +1,9 @@
 package org.sewas.features.steplibs.stepdefs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.sewas.domain.model.model.LeagueTable;
-import org.sewas.domain.model.model.Match;
-import org.sewas.domain.model.model.TeamPosition;
+import org.sewas.domain.model.LeagueTable;
+import org.sewas.domain.model.Match;
+import org.sewas.domain.model.TeamPosition;
 import org.sewas.features.util.World;
 import org.sewas.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.List;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;

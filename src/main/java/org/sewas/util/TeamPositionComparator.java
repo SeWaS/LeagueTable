@@ -1,6 +1,6 @@
 package org.sewas.util;
 
-import org.sewas.domain.model.model.TeamPosition;
+import org.sewas.domain.model.TeamPosition;
 
 import java.util.Comparator;
 

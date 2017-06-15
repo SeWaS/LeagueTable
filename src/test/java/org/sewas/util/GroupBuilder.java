@@ -1,6 +1,6 @@
 package org.sewas.util;
 
-import org.sewas.domain.model.model.Group;
+import org.sewas.domain.model.Group;
 
 /**
  * Created by sebastian on 25/05/17.

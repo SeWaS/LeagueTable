@@ -80,6 +80,16 @@ task runFeatureTests(type: Test) {
 task unitTestReport(type: JacocoReport){
     executionData runUnitTests
     sourceSets sourceSets.main
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    'org/sewas/domain/**',
+                    'org/sewas/rest/dto/**',
+                    'org/sewas/exception/**',
+                    'org/sewas/*.class'
+                ])
+        })
+    }
 }
 
 task integrationTestReport(type: JacocoReport){

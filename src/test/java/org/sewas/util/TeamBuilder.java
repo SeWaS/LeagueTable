@@ -1,6 +1,6 @@
 package org.sewas.util;
 
-import org.sewas.domain.model.model.Team;
+import org.sewas.domain.model.Team;
 
 /**
  * Created by sebastian on 25/05/17.

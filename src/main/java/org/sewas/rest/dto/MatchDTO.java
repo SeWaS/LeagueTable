@@ -1,6 +1,6 @@
 package org.sewas.rest.dto;
 
-import org.sewas.domain.model.model.Match;
+import org.sewas.domain.model.Match;
 
 /**
  * Created by sebastian on 25/05/17.

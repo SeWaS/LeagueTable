@@ -3,7 +3,7 @@ package org.sewas.rest;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
-import org.sewas.domain.model.model.LeagueTable;
+import org.sewas.domain.model.LeagueTable;
 import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.service.LeagueTableService;
 import org.sewas.util.testmarker.IntegrationTest;
@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

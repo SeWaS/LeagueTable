@@ -1,6 +1,6 @@
 package org.sewas.rest;
 
-import org.sewas.domain.model.model.LeagueTable;
+import org.sewas.domain.model.LeagueTable;
 import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.service.LeagueTableService;
 import org.springframework.beans.factory.annotation.Autowired;
