@@ -48,11 +48,6 @@ public class getCurrentTableStepDef
         }
     }
 
-    public void addTeams(List<String> teams)
-    {
-        this.world.addTeams(teams);
-    }
-
     public void createLeague(String leagueID)
     {
         this.world.setLeagueId(leagueID);
@@ -111,5 +106,13 @@ public class getCurrentTableStepDef
 
         assertThat(t.getPosition()).isEqualTo(place);
         assertThat(t.getPoints()).isEqualTo(points);
+    }
+
+    public void resetPlayedMatches() {
+        this.world.resetMatches();
+    }
+
+    public void resetLeagueTable() {
+        this.world.resetLeagueTable();
     }
 }

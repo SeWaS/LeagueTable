@@ -35,4 +35,8 @@ public class TeamPosition {
     public void addTie() {
         this.points = this.points + 1;
     }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
 }

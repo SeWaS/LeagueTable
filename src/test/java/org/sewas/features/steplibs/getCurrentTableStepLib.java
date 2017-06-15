@@ -1,6 +1,8 @@
 package org.sewas.features.steplibs;
 
 import cucumber.api.PendingException;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -26,14 +28,18 @@ public class getCurrentTableStepLib {
     @Autowired
     private getCurrentTableStepDef steps;
 
+    @Before
+    public void setUp(){}
+
+    @After
+    public void tearDown(){
+        this.steps.resetPlayedMatches();
+        this.steps.resetLeagueTable();
+    }
+
     @Given("^League \"([^\"]*)\" exists$")
     public void leagueExists(String leagueId) {
         steps.createLeague(leagueId);
-    }
-
-    @And("^following teams are members: (.*)$")
-    public void followingTeamsAreMembersABCD(List<String> teams) throws Throwable {
-        steps.addTeams(teams);
     }
 
     @When("^Current league is fetched$")
@@ -60,11 +66,5 @@ public class getCurrentTableStepLib {
     @And("^\"([^\"]*)\" is on place (\\d+) with (\\d+) point$")
     public void isOnPlaceWithPoint(String teamname, int place, int points)  {
         this.steps.verifyThatTeamHasPoints(teamname, place, points);
-    }
-
-    @Given("^\"([^\"]*)\" played against \"([^\"]*)\" (\\d+):(\\d+) on matchday (\\d+)$")
-    public void playedAgainstOnMatchday(String arg0, String arg1, int arg2, int arg3, int arg4) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
     }
 }

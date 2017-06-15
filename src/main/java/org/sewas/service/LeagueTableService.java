@@ -26,12 +26,20 @@ public class LeagueTableService {
 
         for (Match match : matchesDTO.getMatches())
         {
+            TeamPosition tp1 = findTeamPositionByTeamName(match.Team1.TeamName, lt);
+            TeamPosition tp2 = findTeamPositionByTeamName(match.Team2.TeamName, lt);
 
-            TeamPosition tp1 = new TeamPosition();
-            tp1.setTeam(match.Team1);
+            if(tp1 == null) {
+                tp1 = new TeamPosition();
+                tp1.setTeam(match.Team1);
+                lt.addTeamPosition(tp1);
+            }
 
-            TeamPosition tp2 = new TeamPosition();
-            tp2.setTeam(match.Team2);
+            if(tp2 == null) {
+                tp2 = new TeamPosition();
+                tp2.setTeam(match.Team2);
+                lt.addTeamPosition(tp2);
+            }
 
             if(match.matchResults.get(1).PointsTeam1 > match.matchResults.get(1).PointsTeam2)
             {
@@ -49,14 +57,23 @@ public class LeagueTableService {
                 tp2.addVictory();
             }
 
-            lt.addTeamPosition(tp1);
-            lt.addTeamPosition(tp2);
+            lt.updatePoints(tp1);
+            lt.updatePoints(tp2);
         }
 
         lt.sortTableByPoints();
 
         return lt;
 
+    }
+
+    private TeamPosition findTeamPositionByTeamName(String teamName, LeagueTable leagueTable) {
+        for(TeamPosition t : leagueTable.getTable()) {
+            if(t.getTeam().TeamName.equals(teamName)) {
+                return t;
+            }
+        }
+        return null;
     }
 
 }

@@ -28,17 +28,6 @@ public class World {
         this.response = response;
     }
 
-    public void addTeams(List<String> teams) {
-        for (String teamname : teams) {
-            TeamPosition tp = new TeamPosition();
-
-            Team t = new Team();
-            t.TeamName = teamname;
-
-            tp.setTeam(t);
-        }
-    }
-
     public void setLeagueId(String leagueID) {
         this.leagueTable.setLeagueID(leagueID);
     }
@@ -61,5 +50,13 @@ public class World {
     public List<Match> getMatches()
     {
         return this.playedMatches;
+    }
+
+    public void resetMatches(){
+        this.playedMatches.clear();
+    }
+
+    public void resetLeagueTable() {
+        this.leagueTable.clear();
     }
 }
