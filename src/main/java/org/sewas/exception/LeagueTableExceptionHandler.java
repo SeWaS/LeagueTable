@@ -17,7 +17,6 @@ public class LeagueTableExceptionHandler {
         // 404
     }
 
-    // TODO: Exceptionhandling for OpenLigaDbNotOkException
     @ResponseStatus(value = HttpStatus.I_AM_A_TEAPOT, reason="OpenLigaDB did not send valid response.")
     @ExceptionHandler(OpenLigaDbNotOkException.class)
     public void handleIAmATeapotException() {
