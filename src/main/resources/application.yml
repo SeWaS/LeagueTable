@@ -1,0 +1,5 @@
+openliga:
+  api:
+    getmachdata: "https://www.openligadb.de/api/getmatchdata/"
+server:
+  port: 9000
