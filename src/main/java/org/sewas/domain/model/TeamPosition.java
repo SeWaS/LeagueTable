@@ -34,10 +34,14 @@ public class TeamPosition {
 
     public void addVictory() {
         this.points = this.points + 3;
+        this.numberOfMatchDays = this.numberOfMatchDays +1;
+        this.numberOfVictories = this.numberOfVictories +1;
     }
 
     public void addTie() {
         this.points = this.points + 1;
+        this.numberOfMatchDays = this.numberOfMatchDays +1;
+        this.numberOfTies = this.numberOfTies +1;
     }
 
     public void setPoints(int points) {
@@ -74,5 +78,10 @@ public class TeamPosition {
 
     public void setNumberOfLoss(int numberOfLoss) {
         this.numberOfLoss = numberOfLoss;
+    }
+
+    public void addLoss() {
+        this.numberOfMatchDays = this.numberOfMatchDays +1;
+        this.numberOfLoss = this.numberOfLoss +1;
     }
 }

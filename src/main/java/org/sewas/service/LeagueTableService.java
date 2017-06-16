@@ -45,6 +45,7 @@ public class LeagueTableService {
             if(match.matchResults.get(1).PointsTeam1 > match.matchResults.get(1).PointsTeam2)
             {
                 tp1.addVictory();
+                tp2.addLoss();
             }
 
             if(match.matchResults.get(1).PointsTeam1 == match.matchResults.get(1).PointsTeam2)
@@ -56,6 +57,7 @@ public class LeagueTableService {
             if(match.matchResults.get(1).PointsTeam1 < match.matchResults.get(1).PointsTeam2)
             {
                 tp2.addVictory();
+                tp1.addLoss();
             }
 
             lt.updatePoints(tp1);

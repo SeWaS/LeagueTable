@@ -73,8 +73,19 @@ public class LeagueTableServiceTest {
         // then
         assertThat(tp1.getPoints()).isEqualTo(3);
         assertThat(tp2.getPoints()).isEqualTo(0);
+
         assertThat(tp1.getPosition()).isEqualTo(1);
         assertThat(tp2.getPosition()).isEqualTo(2);
+
+        assertThat(tp1.getNumberOfLoss()).isEqualTo(0);
+        assertThat(tp1.getNumberOfTies()).isEqualTo(0);
+        assertThat(tp1.getNumberOfVictories()).isEqualTo(1);
+        assertThat(tp1.getNumberOfMatchDays()).isEqualTo(1);
+
+        assertThat(tp2.getNumberOfLoss()).isEqualTo(1);
+        assertThat(tp2.getNumberOfTies()).isEqualTo(0);
+        assertThat(tp2.getNumberOfVictories()).isEqualTo(0);
+        assertThat(tp2.getNumberOfMatchDays()).isEqualTo(1);
 
     }
 
@@ -116,6 +127,16 @@ public class LeagueTableServiceTest {
         assertThat(tp1.getPosition()).isEqualTo(2);
         assertThat(tp2.getPosition()).isEqualTo(1);
 
+        assertThat(tp1.getNumberOfLoss()).isEqualTo(1);
+        assertThat(tp1.getNumberOfTies()).isEqualTo(0);
+        assertThat(tp1.getNumberOfVictories()).isEqualTo(0);
+        assertThat(tp1.getNumberOfMatchDays()).isEqualTo(1);
+
+        assertThat(tp2.getNumberOfLoss()).isEqualTo(0);
+        assertThat(tp2.getNumberOfTies()).isEqualTo(0);
+        assertThat(tp2.getNumberOfVictories()).isEqualTo(1);
+        assertThat(tp2.getNumberOfMatchDays()).isEqualTo(1);
+
     }
 
     @Test
@@ -155,6 +176,16 @@ public class LeagueTableServiceTest {
         assertThat(tp2.getPoints()).isEqualTo(1);
         assertThat(tp1.getPosition()).isEqualTo(1);
         assertThat(tp2.getPosition()).isEqualTo(1);
+
+        assertThat(tp1.getNumberOfLoss()).isEqualTo(0);
+        assertThat(tp1.getNumberOfTies()).isEqualTo(1);
+        assertThat(tp1.getNumberOfVictories()).isEqualTo(0);
+        assertThat(tp1.getNumberOfMatchDays()).isEqualTo(1);
+
+        assertThat(tp2.getNumberOfLoss()).isEqualTo(0);
+        assertThat(tp2.getNumberOfTies()).isEqualTo(1);
+        assertThat(tp2.getNumberOfVictories()).isEqualTo(0);
+        assertThat(tp2.getNumberOfMatchDays()).isEqualTo(1);
 
     }
 
@@ -212,6 +243,16 @@ public class LeagueTableServiceTest {
         assertThat(tp2.getPoints()).isEqualTo(0);
         assertThat(tp1.getPosition()).isEqualTo(1);
         assertThat(tp2.getPosition()).isEqualTo(2);
+
+        assertThat(tp1.getNumberOfLoss()).isEqualTo(0);
+        assertThat(tp1.getNumberOfTies()).isEqualTo(0);
+        assertThat(tp1.getNumberOfVictories()).isEqualTo(2);
+        assertThat(tp1.getNumberOfMatchDays()).isEqualTo(2);
+
+        assertThat(tp2.getNumberOfLoss()).isEqualTo(2);
+        assertThat(tp2.getNumberOfTies()).isEqualTo(0);
+        assertThat(tp2.getNumberOfVictories()).isEqualTo(0);
+        assertThat(tp2.getNumberOfMatchDays()).isEqualTo(2);
 
     }
 }
