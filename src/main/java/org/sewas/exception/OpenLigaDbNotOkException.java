@@ -5,8 +5,4 @@ package org.sewas.exception;
  */
 public class OpenLigaDbNotOkException extends Exception {
     public OpenLigaDbNotOkException(){}
-
-    public OpenLigaDbNotOkException(String message) {
-        super(message);
-    }
 }

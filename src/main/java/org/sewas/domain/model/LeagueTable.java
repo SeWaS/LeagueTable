@@ -48,10 +48,6 @@ public class LeagueTable {
         }
     }
 
-    public void clear() {
-        this.table.clear();
-    }
-
     public void updatePoints(TeamPosition tp) {
         for(TeamPosition t : this.table) {
             if(t.getTeam().TeamName.equals(tp.getTeam().TeamName)) {

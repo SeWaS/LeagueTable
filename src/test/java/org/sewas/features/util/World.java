@@ -54,8 +54,4 @@ public class World {
     public void resetMatches(){
         this.playedMatches.clear();
     }
-
-    public void resetLeagueTable() {
-        this.leagueTable.clear();
-    }
 }

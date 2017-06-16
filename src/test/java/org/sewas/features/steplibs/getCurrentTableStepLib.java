@@ -36,7 +36,6 @@ public class getCurrentTableStepLib {
     @After
     public void tearDown(){
         this.steps.resetPlayedMatches();
-        this.steps.resetLeagueTable();
     }
 
     @Given("^League \"([^\"]*)\" exists$")

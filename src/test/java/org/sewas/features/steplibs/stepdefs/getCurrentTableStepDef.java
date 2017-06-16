@@ -111,10 +111,6 @@ public class getCurrentTableStepDef
         this.world.resetMatches();
     }
 
-    public void resetLeagueTable() {
-        this.world.resetLeagueTable();
-    }
-
     public void verifyNumberOfMatchdaysForTeam(String teamname, int numberOfMatchdays) {
         LeagueTable receivedLeagueTable = this.world.getResponse().getBody();
 

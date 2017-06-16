@@ -9,8 +9,4 @@ public class SeasonNotAvailableException extends Exception {
 
     }
 
-    public SeasonNotAvailableException(String message) {
-        super(message);
-    }
-
 }
