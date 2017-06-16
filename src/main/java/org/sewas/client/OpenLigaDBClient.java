@@ -1,12 +1,14 @@
 package org.sewas.client;
 
 import org.sewas.OpenLigaDBConfig;
+import org.sewas.exception.OpenLigaDbNotOkException;
 import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.rest.dto.MatchDTO;
 import org.sewas.domain.model.Match;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -25,7 +27,7 @@ public class OpenLigaDBClient {
     @Autowired
     private OpenLigaDBConfig openLigaDBConfig;
 
-    public MatchDTO getMatchesForLeague(String leagueID, String season) throws SeasonNotAvailableException {
+    public MatchDTO getMatchesForLeague(String leagueID, String season) throws SeasonNotAvailableException, OpenLigaDbNotOkException {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -34,7 +36,13 @@ public class OpenLigaDBClient {
 
         String url = this.openLigaDBConfig.getGetmachdata() + leagueID + "/" + season;
 
-        ResponseEntity<Match[]> Matches = restTemplate.exchange(url, GET, entity, Match[].class);
+        ResponseEntity<Match[]> Matches;
+
+        try{
+            Matches = restTemplate.exchange(url, GET, entity, Match[].class);
+        } catch (HttpClientErrorException e) {
+            throw new OpenLigaDbNotOkException();
+        }
 
         if(Matches.getBody().length == 0) {
             throw new SeasonNotAvailableException();

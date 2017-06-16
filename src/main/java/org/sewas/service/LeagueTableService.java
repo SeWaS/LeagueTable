@@ -1,6 +1,7 @@
 package org.sewas.service;
 
 import org.sewas.client.OpenLigaDBClient;
+import org.sewas.exception.OpenLigaDbNotOkException;
 import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.rest.dto.MatchDTO;
 import org.sewas.domain.model.LeagueTable;
@@ -18,7 +19,7 @@ public class LeagueTableService {
     @Autowired
     private OpenLigaDBClient openLigaDBClient;
 
-    public LeagueTable returnCurrentLeagueTable(String leagueID, String season) throws SeasonNotAvailableException {
+    public LeagueTable returnCurrentLeagueTable(String leagueID, String season) throws SeasonNotAvailableException, OpenLigaDbNotOkException {
 
         MatchDTO matchesDTO = this.openLigaDBClient.getMatchesForLeague(leagueID, season);
 

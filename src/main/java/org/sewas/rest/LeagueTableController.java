@@ -1,6 +1,7 @@
 package org.sewas.rest;
 
 import org.sewas.domain.model.LeagueTable;
+import org.sewas.exception.OpenLigaDbNotOkException;
 import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.service.LeagueTableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class LeagueTableController implements ILeagueTableApi {
     private LeagueTableService leagueTableService;
 
     @Override
-    public ResponseEntity<LeagueTable> getCurrentTableForLeague(@PathVariable  String leagueID, @PathVariable String season) throws SeasonNotAvailableException {
+    public ResponseEntity<LeagueTable> getCurrentTableForLeague(@PathVariable  String leagueID, @PathVariable String season) throws SeasonNotAvailableException, OpenLigaDbNotOkException {
         return new ResponseEntity<>(this.leagueTableService.returnCurrentLeagueTable(leagueID, season), HttpStatus.OK);
     }
 

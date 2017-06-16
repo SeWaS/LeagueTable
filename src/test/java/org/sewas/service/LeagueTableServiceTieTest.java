@@ -10,6 +10,7 @@ import org.sewas.client.OpenLigaDBClient;
 import org.sewas.domain.model.LeagueTable;
 import org.sewas.domain.model.Match;
 import org.sewas.domain.model.TeamPosition;
+import org.sewas.exception.OpenLigaDbNotOkException;
 import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.rest.dto.MatchDTO;
 import org.sewas.util.ListSearch;
@@ -37,7 +38,7 @@ public class LeagueTableServiceTieTest {
     TeamPosition tp2;
 
     @Before
-    public void setUp() throws SeasonNotAvailableException {
+    public void setUp() throws SeasonNotAvailableException, OpenLigaDbNotOkException {
         ListSearch listSearch = new ListSearch();
 
         // given

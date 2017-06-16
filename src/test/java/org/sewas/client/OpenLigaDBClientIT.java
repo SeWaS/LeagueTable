@@ -8,11 +8,13 @@ import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.sewas.config.ClientTestConfig;
 import org.sewas.domain.model.Match;
+import org.sewas.exception.OpenLigaDbNotOkException;
 import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.rest.dto.MatchDTO;
 import org.sewas.util.testmarker.IntegrationTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -20,6 +22,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
@@ -45,7 +48,7 @@ public class OpenLigaDBClientIT {
     }
 
     @Test
-    public void shouldReturnMatchDTOForExistingLeague() throws JsonProcessingException, SeasonNotAvailableException {
+    public void shouldReturnMatchDTOForExistingLeague() throws JsonProcessingException, SeasonNotAvailableException, OpenLigaDbNotOkException {
 
         Match[] responseMatches = {new Match(), new Match(), new Match()};
 
@@ -59,7 +62,7 @@ public class OpenLigaDBClientIT {
     }
 
     @Test(expected = SeasonNotAvailableException.class)
-    public void shouldThrowExceptionIfNoMatchesForSeasonFound() throws JsonProcessingException, SeasonNotAvailableException {
+    public void shouldThrowExceptionIfNoMatchesForSeasonFound() throws JsonProcessingException, SeasonNotAvailableException, OpenLigaDbNotOkException {
 
         Match[] responseMatches = {};
 
@@ -67,5 +70,16 @@ public class OpenLigaDBClientIT {
                 .andRespond(withSuccess(o.writeValueAsString(responseMatches), MediaType.APPLICATION_JSON));
 
         MatchDTO result = this.openLigaDBClient.getMatchesForLeague("nonExistingLeague", "anyYear");
+    }
+
+    @Test(expected = OpenLigaDbNotOkException.class)
+    public void shouldThrowExceptionIfOpenLigaDbAnswersNotWithOK() throws JsonProcessingException, OpenLigaDbNotOkException, SeasonNotAvailableException {
+
+        Match[] responseMatches = {new Match(), new Match(), new Match()};
+
+        this.server.expect(requestTo("http://localhost:1234/api/getmatchdata/anyLeague/anyYear"))
+                .andRespond(withStatus(HttpStatus.NOT_FOUND));
+
+        MatchDTO result = this.openLigaDBClient.getMatchesForLeague("anyLeague", "anyYear");
     }
 }

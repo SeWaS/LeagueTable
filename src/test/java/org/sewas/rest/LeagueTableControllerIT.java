@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.sewas.domain.model.LeagueTable;
+import org.sewas.exception.OpenLigaDbNotOkException;
 import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.service.LeagueTableService;
 import org.sewas.util.testmarker.IntegrationTest;
@@ -45,12 +46,22 @@ public class LeagueTableControllerIT {
         verify(this.leagueTableService, times(1)).returnCurrentLeagueTable("1234", "2016");
     }
 
-    @Test
-    public void shouldReturnNotFoundExceptionIfNoMatchesReturn() throws Exception {
+    @Test // 404
+    public void shouldReturnNotFoundStatusIfNoMatchesReturn() throws Exception {
         given(this.leagueTableService.returnCurrentLeagueTable(anyString(), anyString())).willThrow(SeasonNotAvailableException.class);
 
         this.mockMvc.perform(get("/api/leagueTable/1234/2016").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+
+        verify(this.leagueTableService, times(1)).returnCurrentLeagueTable("1234", "2016");
+    }
+
+    @Test // 418
+    public void shouldReturnTeapotStatusIfOpenLigaNotOkExceptionIsThrown() throws Exception {
+        given(this.leagueTableService.returnCurrentLeagueTable(anyString(), anyString())).willThrow(OpenLigaDbNotOkException.class);
+
+        this.mockMvc.perform(get("/api/leagueTable/1234/2016").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isIAmATeapot());
 
         verify(this.leagueTableService, times(1)).returnCurrentLeagueTable("1234", "2016");
     }
