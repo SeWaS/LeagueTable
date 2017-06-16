@@ -17,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.IOException;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * Created by sebastian on 22/05/17.
  */
@@ -66,5 +68,36 @@ public class getCurrentTableStepLib {
     @And("^\"([^\"]*)\" is on place (\\d+) with (\\d+) point$")
     public void isOnPlaceWithPoint(String teamname, int place, int points)  {
         this.steps.verifyThatTeamHasPoints(teamname, place, points);
+    }
+
+    @And("^\"([^\"]*)\" has (\\d+) matchday played$")
+    public void hasMatchdayPlayed(String teamname, int numberOfMatchdays)  {
+        this.steps.verifyNumberOfMatchdaysForTeam(teamname, numberOfMatchdays);
+    }
+
+    @And("^\"([^\"]*)\" has (\\d+) matchdays played$")
+    public void hasMatchdaysPlayed(String teamname, int numberOfMatchdays) {
+        this.steps.verifyNumberOfMatchdaysForTeam(teamname, numberOfMatchdays);
+    }
+
+    @And("^\"([^\"]*)\" has (\\d+) victory, (\\d+) ties and (\\d+) loss$")
+    public void hasVictoryTiesAndLoss(String teamname, int victories, int ties, int loss) {
+        this.steps.verifyVictoriesForTeamname(teamname, victories);
+        this.steps.verifyTiesForTeamname(teamname, ties);
+        this.steps.verifyLossForTeamname(teamname, loss);
+    }
+
+    @And("^\"([^\"]*)\" has (\\d+) victories, (\\d+) tie and (\\d+) loss$")
+    public void hasVictoriesTieAndLoss(String teamname, int victories, int ties, int loss) {
+        this.steps.verifyVictoriesForTeamname(teamname, victories);
+        this.steps.verifyTiesForTeamname(teamname, ties);
+        this.steps.verifyLossForTeamname(teamname, loss);
+    }
+
+    @And("^\"([^\"]*)\" has (\\d+) victories, (\\d+) ties and (\\d+) loss$")
+    public void hasVictoriesTiesAndLoss(String teamname, int victories, int ties, int loss) {
+        this.steps.verifyVictoriesForTeamname(teamname, victories);
+        this.steps.verifyTiesForTeamname(teamname, ties);
+        this.steps.verifyLossForTeamname(teamname, loss);
     }
 }

@@ -7,6 +7,10 @@ public class TeamPosition {
     private Team team;
     private int points;
     private int position;
+    private int numberOfMatchDays;
+    private int numberOfVictories;
+    private int numberOfTies;
+    private int numberOfLoss;
 
     public int getPosition() {
         return position;
@@ -38,5 +42,37 @@ public class TeamPosition {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public int getNumberOfMatchDays() {
+        return numberOfMatchDays;
+    }
+
+    public void setNumberOfMatchDays(int numberOfMatchDays) {
+        this.numberOfMatchDays = numberOfMatchDays;
+    }
+
+    public int getNumberOfVictories() {
+        return numberOfVictories;
+    }
+
+    public void setNumberOfVictories(int numberOfVictories) {
+        this.numberOfVictories = numberOfVictories;
+    }
+
+    public int getNumberOfTies() {
+        return numberOfTies;
+    }
+
+    public void setNumberOfTies(int numberOfTies) {
+        this.numberOfTies = numberOfTies;
+    }
+
+    public int getNumberOfLoss() {
+        return numberOfLoss;
+    }
+
+    public void setNumberOfLoss(int numberOfLoss) {
+        this.numberOfLoss = numberOfLoss;
     }
 }

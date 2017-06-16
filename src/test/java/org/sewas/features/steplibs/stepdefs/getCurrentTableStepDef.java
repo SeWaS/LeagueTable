@@ -114,4 +114,44 @@ public class getCurrentTableStepDef
     public void resetLeagueTable() {
         this.world.resetLeagueTable();
     }
+
+    public void verifyNumberOfMatchdaysForTeam(String teamname, int numberOfMatchdays) {
+        LeagueTable receivedLeagueTable = this.world.getResponse().getBody();
+
+        ListSearch listSearch = new ListSearch();
+
+        TeamPosition t = listSearch.findTeamPositionByTeamname(teamname, receivedLeagueTable);
+
+        assertThat(t.getNumberOfMatchDays()).isEqualTo(numberOfMatchdays);
+    }
+
+    public void verifyVictoriesForTeamname(String teamname, int victories) {
+        LeagueTable receivedLeagueTable = this.world.getResponse().getBody();
+
+        ListSearch listSearch = new ListSearch();
+
+        TeamPosition t = listSearch.findTeamPositionByTeamname(teamname, receivedLeagueTable);
+
+        assertThat(t.getNumberOfVictories()).isEqualTo(victories);
+    }
+
+    public void verifyTiesForTeamname(String teamname, int ties) {
+        LeagueTable receivedLeagueTable = this.world.getResponse().getBody();
+
+        ListSearch listSearch = new ListSearch();
+
+        TeamPosition t = listSearch.findTeamPositionByTeamname(teamname, receivedLeagueTable);
+
+        assertThat(t.getNumberOfTies()).isEqualTo(ties);
+    }
+
+    public void verifyLossForTeamname(String teamname, int loss) {
+        LeagueTable receivedLeagueTable = this.world.getResponse().getBody();
+
+        ListSearch listSearch = new ListSearch();
+
+        TeamPosition t = listSearch.findTeamPositionByTeamname(teamname, receivedLeagueTable);
+
+        assertThat(t.getNumberOfLoss()).isEqualTo(loss);
+    }
 }
