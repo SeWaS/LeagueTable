@@ -1,6 +1,5 @@
-package org.sewas.features.steplibs;
+package org.sewas.features.stepdefs;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -9,13 +8,12 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.sewas.LeagueTableApplication;
 import org.sewas.config.ScenarioConfig;
-import org.sewas.features.steplibs.stepdefs.getCurrentTableStepDef;
+import org.sewas.features.stepdefs.steplibs.getCurrentTableStepLib;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,10 +23,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = {LeagueTableApplication.class, ScenarioConfig.class})
 @AutoConfigureWireMock(port = 1234)
-public class getCurrentTableStepLib {
+public class getCurrentTableStepDef {
 
     @Autowired
-    private getCurrentTableStepDef steps;
+    private getCurrentTableStepLib steps;
 
     @Before
     public void setUp(){}

@@ -1,4 +1,4 @@
-package org.sewas.features.steplibs.stepdefs;
+package org.sewas.features.stepdefs.steplibs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.sewas.domain.model.LeagueTable;
@@ -21,7 +21,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  * Created by sebastian on 22/05/17.
  */
 @Component
-public class getCurrentTableStepDef
+public class getCurrentTableStepLib
 {
 
     @Autowired
