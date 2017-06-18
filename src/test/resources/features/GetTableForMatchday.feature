@@ -14,4 +14,3 @@ Feature: Get league table for specific machday
   Scenario: Fetching league table for future matchday
     When League table for matchday 4 of league "bl1" will be fetched
     Then No league table will be fetched
-    And Error message will be received
