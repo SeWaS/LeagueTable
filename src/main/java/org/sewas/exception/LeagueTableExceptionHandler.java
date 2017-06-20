@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class LeagueTableExceptionHandler {
 
     @ResponseStatus(value= HttpStatus.NOT_FOUND, reason="Requested season is not available.")
-    @ExceptionHandler(SeasonNotAvailableException.class)
+    @ExceptionHandler({SeasonNotAvailableException.class, MatchdayNotAvailableException.class})
     public void handleSeasonNotAvailableException(){
         // 404
     }
