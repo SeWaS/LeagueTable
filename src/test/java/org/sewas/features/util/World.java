@@ -72,4 +72,8 @@ public class World {
     public ResponseEntity<LeagueTable> getResponseForMatchdayTable() {
         return responseForMatchdayTable;
     }
+
+    public void resetMatchdays() {
+        this.playedMatchDays.clear();
+    }
 }

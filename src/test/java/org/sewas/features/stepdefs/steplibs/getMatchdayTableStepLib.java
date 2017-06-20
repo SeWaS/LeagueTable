@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,10 +34,9 @@ public class getMatchdayTableStepLib {
     }
 
     public void generateMatchesForLeague(int numOfMatchdays) {
-        // TODO: generate Matches and add them to an array which will be added to worls.playedMatches
 
         // one loop representa a matchday - two matches per matchday
-        for(int i=1;i<numOfMatchdays;i++) {
+        for(int i=1;i<=numOfMatchdays;i++) {
 
             Match match1 = new MatchBuilder()
                     .withTeam1(new TeamBuilder()
@@ -86,23 +87,39 @@ public class getMatchdayTableStepLib {
     }
 
     public void requestMatchdayTable(int requestedMatchday) {
-        String url = "/api/leagueTable/"+this.world.getLeagueID()+"/2016/"+requestedMatchday;
+        String url = "/api/leagueTable/"+this.world.getLeagueID()+"/2016/" + requestedMatchday;
         this.world.setFetchForMatchdayResponse(this.testRestTemplate.getForEntity(url, LeagueTable.class));
     }
 
-    public void initWiremock() throws JsonProcessingException {
+    public void initWiremock(int requestedMatchday) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        String stubJson = objectMapper.writeValueAsString(this.world.getPlayedMatchDays());
+        Integer numOfMatchdays = this.world.getPlayedMatchDays().size();
 
-        stubFor(get(urlMatching("/api/getmatchdata/"+this.world.getLeagueID()+"/2016/(\\d+)"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withBody(stubJson)));
+        // ToDo: subsequential stubbing?
+
+        for(int i=1;i<= numOfMatchdays;i++) {
+            stubFor(get(urlEqualTo("/api/getmatchdata/"+this.world.getLeagueID()+"/2016/"+i))
+                    .willReturn(aResponse()
+                            .withStatus(200)
+                            .withBody(
+                                    objectMapper.writeValueAsString(this.world.getPlayedMatchDays().get(i-1))
+                            )));
+
+        }
+
+        // Asking for a not available matchday
+        if(requestedMatchday > numOfMatchdays) {
+            stubFor(get(urlEqualTo("/api/getmatchdata/"+this.world.getLeagueID()+"/2016/"+requestedMatchday))
+                    .willReturn(aResponse()
+                            .withStatus(200)
+                            .withBody("[]")));
+        }
+
     }
 
     public void verifyThatCorrectLeagueWasReceived(String leagueID) {
-        assertThat(this.world.getLeagueID()).isEqualTo(leagueID);
+        assertThat(this.world.getResponseForMatchdayTable().getBody().getLeagueID()).isEqualTo(leagueID);
     }
 
     public void verifyThatCorrectMatchdayWasReceives(int requestedMatchday) {
@@ -112,6 +129,11 @@ public class getMatchdayTableStepLib {
 
     public void verifyThatNoLeagueTableHasBeenReceived() {
         assertThat(this.world.getResponseForMatchdayTable().getStatusCodeValue()).isEqualTo(404);
-        assertThat(this.world.getResponseForMatchdayTable().getBody()).isNull();
+        assertThat(this.world.getResponseForMatchdayTable().getBody().getLeagueID()).isNull();
+        assertThat(this.world.getResponseForMatchdayTable().getBody().getTable().size()).isEqualTo(0);
+    }
+
+    public void resetPlayedMatchdays() {
+        this.world.resetMatchdays();
     }
 }
