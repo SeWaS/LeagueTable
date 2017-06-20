@@ -1,6 +1,7 @@
 package org.sewas.client;
 
 import org.sewas.OpenLigaDBConfig;
+import org.sewas.exception.MatchdayNotAvailableException;
 import org.sewas.exception.OpenLigaDbNotOkException;
 import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.rest.dto.MatchDTO;
@@ -27,7 +28,7 @@ public class OpenLigaDBClient {
     @Autowired
     private OpenLigaDBConfig openLigaDBConfig;
 
-    public MatchDTO getMatchesForLeague(String leagueID, String season) throws SeasonNotAvailableException, OpenLigaDbNotOkException {
+    public MatchDTO getMatchesForLeagueMatchday(String leagueID, String season) throws SeasonNotAvailableException, OpenLigaDbNotOkException {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -50,9 +51,36 @@ public class OpenLigaDBClient {
 
         MatchDTO matchDTO = new MatchDTO();
         matchDTO.setStatusCode(Matches.getStatusCodeValue());
-        matchDTO.setMatches(Matches.getBody());
+        matchDTO.setMatches(Arrays.asList(Matches.getBody()));
 
         return matchDTO;
     }
 
+    public MatchDTO getMatchesForLeagueMatchday(String leagueID, String season, String matchday) throws OpenLigaDbNotOkException, MatchdayNotAvailableException {
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+
+        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+
+        String url = this.openLigaDBConfig.getGetmachdata() + leagueID + "/" + season + "/" + matchday;
+
+        ResponseEntity<Match[]> Matches;
+
+        try{
+            Matches = restTemplate.exchange(url, GET, entity, Match[].class);
+        } catch (HttpClientErrorException e) {
+            throw new OpenLigaDbNotOkException();
+        }
+
+        if(Matches.getBody().length == 0) {
+            throw new MatchdayNotAvailableException();
+        }
+
+        MatchDTO matchDTO = new MatchDTO();
+        matchDTO.setStatusCode(Matches.getStatusCodeValue());
+        matchDTO.setMatches(Arrays.asList(Matches.getBody()));
+
+        return matchDTO;
+    }
 }

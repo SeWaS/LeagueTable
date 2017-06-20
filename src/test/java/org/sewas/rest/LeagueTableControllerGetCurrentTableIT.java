@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Category(IntegrationTest.class)
 @RunWith(SpringRunner.class)
 @WebMvcTest(LeagueTableController.class)
-public class LeagueTableControllerIT {
+public class LeagueTableControllerGetCurrentTableIT {
 
     @Autowired
     private MockMvc mockMvc;

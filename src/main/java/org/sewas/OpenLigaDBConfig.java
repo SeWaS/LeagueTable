@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class OpenLigaDBConfig {
 
     private String getmachdata;
+    private String getcurrentgroup;
 
     public String getGetmachdata() {
         return getmachdata;
@@ -18,5 +19,13 @@ public class OpenLigaDBConfig {
 
     public void setGetmachdata(String getmachdata) {
         this.getmachdata = getmachdata;
+    }
+
+    public String getGetcurrentgroup() {
+        return getcurrentgroup;
+    }
+
+    public void setGetcurrentgroup(String getcurrentgroup) {
+        this.getcurrentgroup = getcurrentgroup;
     }
 }

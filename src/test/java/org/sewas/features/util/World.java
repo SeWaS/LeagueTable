@@ -17,7 +17,9 @@ public class World {
 
     private LeagueTable leagueTable = new LeagueTable();
     private ResponseEntity<LeagueTable> response;
+    private ResponseEntity<LeagueTable> responseForMatchdayTable;
     private List<Match> playedMatches = new ArrayList<Match>();
+    private List<Match[]> playedMatchDays = new ArrayList<Match[]>();
 
     public ResponseEntity<LeagueTable> getResponse() {
         return response;
@@ -53,5 +55,25 @@ public class World {
 
     public void resetMatches(){
         this.playedMatches.clear();
+    }
+
+    public void addMatchDay(Match[] matchday) {
+        this.playedMatchDays.add(matchday);
+    }
+
+    public void setFetchForMatchdayResponse(ResponseEntity<LeagueTable> response) {
+        this.responseForMatchdayTable = response;
+    }
+
+    public List<Match[]> getPlayedMatchDays() {
+        return playedMatchDays;
+    }
+
+    public ResponseEntity<LeagueTable> getResponseForMatchdayTable() {
+        return responseForMatchdayTable;
+    }
+
+    public void resetMatchdays() {
+        this.playedMatchDays.clear();
     }
 }

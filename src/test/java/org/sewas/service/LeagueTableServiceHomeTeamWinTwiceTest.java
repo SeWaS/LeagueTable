@@ -18,6 +18,8 @@ import org.sewas.util.MatchBuilder;
 import org.sewas.util.MatchResultBuilder;
 import org.sewas.util.TeamBuilder;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyString;
@@ -77,9 +79,9 @@ public class LeagueTableServiceHomeTeamWinTwiceTest {
                 .build();
 
         MatchDTO mockMatchDto = new MatchDTO();
-        mockMatchDto.setMatches(new Match[] {mockMatch1, mockMatch2});
+        mockMatchDto.setMatches(Arrays.asList(mockMatch1, mockMatch2));
 
-        given(this.mockClient.getMatchesForLeague(anyString(), anyString())).willReturn(mockMatchDto);
+        given(this.mockClient.getMatchesForLeagueMatchday(anyString(), anyString())).willReturn(mockMatchDto);
 
         // when
         LeagueTable receivedLeagueTable = this.underTest.returnCurrentLeagueTable("anyLeagueID", "anyYear");
