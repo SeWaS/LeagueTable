@@ -7,6 +7,9 @@ A spring servie that provides endpoints for fetching a soccer league's table bas
 ### /api/leagueTable/bl1/2016
 *Returns the current table of league with identifier "bl1".*
 
+### /api/leagueTable/bl1/2016/18
+*Returns the table of league with identifier "bl1" for matchday 18.*
+
 ## Starting application:
 
 ### './gradlew bootRun'
