@@ -96,8 +96,6 @@ public class getMatchdayTableStepLib {
 
         Integer numOfMatchdays = this.world.getPlayedMatchDays().size();
 
-        // ToDo: subsequential stubbing?
-
         for(int i=1;i<= numOfMatchdays;i++) {
             stubFor(get(urlEqualTo("/api/getmatchdata/"+this.world.getLeagueID()+"/2016/"+i))
                     .willReturn(aResponse()

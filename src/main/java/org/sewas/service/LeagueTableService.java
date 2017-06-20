@@ -119,9 +119,6 @@ public class LeagueTableService {
             tp1.addGoalsAgainst(match.matchResults.get(1).PointsTeam2);
             tp2.addGoalsFor(match.matchResults.get(1).PointsTeam2);
             tp2.addGoalsAgainst(match.matchResults.get(1).PointsTeam1);
-
-            //lt.updatePoints(tp1);
-            //lt.updatePoints(tp2);
         }
 
         return lt;
