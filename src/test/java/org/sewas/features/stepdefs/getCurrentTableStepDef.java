@@ -1,5 +1,6 @@
 package org.sewas.features.stepdefs;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -96,5 +97,11 @@ public class getCurrentTableStepDef {
         this.steps.verifyVictoriesForTeamname(teamname, victories);
         this.steps.verifyTiesForTeamname(teamname, ties);
         this.steps.verifyLossForTeamname(teamname, loss);
+    }
+
+    @And("^\"([^\"]*)\" has goal difference of (\\d+):(\\d+)$")
+    public void hasGoalDifferenceOf(String arg0, int arg1, int arg2) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        throw new PendingException();
     }
 }
