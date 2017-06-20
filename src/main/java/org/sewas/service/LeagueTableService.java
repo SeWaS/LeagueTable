@@ -1,13 +1,13 @@
 package org.sewas.service;
 
 import org.sewas.client.OpenLigaDBClient;
+import org.sewas.domain.model.LeagueTable;
+import org.sewas.domain.model.Match;
+import org.sewas.domain.model.TeamPosition;
 import org.sewas.exception.MatchdayNotAvailableException;
 import org.sewas.exception.OpenLigaDbNotOkException;
 import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.rest.dto.MatchDTO;
-import org.sewas.domain.model.LeagueTable;
-import org.sewas.domain.model.Match;
-import org.sewas.domain.model.TeamPosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -115,8 +115,13 @@ public class LeagueTableService {
                 tp1.addLoss();
             }
 
-            lt.updatePoints(tp1);
-            lt.updatePoints(tp2);
+            tp1.addGoalsFor(match.matchResults.get(1).PointsTeam1);
+            tp1.addGoalsAgainst(match.matchResults.get(1).PointsTeam2);
+            tp2.addGoalsFor(match.matchResults.get(1).PointsTeam2);
+            tp2.addGoalsAgainst(match.matchResults.get(1).PointsTeam1);
+
+            //lt.updatePoints(tp1);
+            //lt.updatePoints(tp2);
         }
 
         return lt;

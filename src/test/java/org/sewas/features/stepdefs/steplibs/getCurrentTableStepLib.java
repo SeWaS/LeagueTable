@@ -14,8 +14,6 @@ import java.io.IOException;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
  * Created by sebastian on 22/05/17.
@@ -149,5 +147,16 @@ public class getCurrentTableStepLib
         TeamPosition t = listSearch.findTeamPositionByTeamname(teamname, receivedLeagueTable);
 
         assertThat(t.getNumberOfLoss()).isEqualTo(loss);
+    }
+
+    public void verifyGoalDifference(String teamname, int goalsFor, int goalsAgainst) {
+        LeagueTable receivedLeagueTable = this.world.getResponse().getBody();
+
+        ListSearch listSearch = new ListSearch();
+
+        TeamPosition t = listSearch.findTeamPositionByTeamname(teamname, receivedLeagueTable);
+
+        assertThat(t.getGoalsFor()).isEqualTo(goalsFor);
+        assertThat(t.getGoalsAgainst()).isEqualTo(goalsAgainst);
     }
 }

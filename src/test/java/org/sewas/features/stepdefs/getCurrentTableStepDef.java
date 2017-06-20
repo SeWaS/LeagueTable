@@ -1,6 +1,5 @@
 package org.sewas.features.stepdefs;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
@@ -11,12 +10,10 @@ import org.sewas.LeagueTableApplication;
 import org.sewas.config.ScenarioConfig;
 import org.sewas.features.stepdefs.steplibs.getCurrentTableStepLib;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 
 import java.io.IOException;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by sebastian on 22/05/17.
@@ -100,8 +97,7 @@ public class getCurrentTableStepDef {
     }
 
     @And("^\"([^\"]*)\" has goal difference of (\\d+):(\\d+)$")
-    public void hasGoalDifferenceOf(String arg0, int arg1, int arg2) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void hasGoalDifferenceOf(String teamname, int goalsFor, int goalsAgainst) {
+        this.steps.verifyGoalDifference(teamname, goalsFor, goalsAgainst);
     }
 }

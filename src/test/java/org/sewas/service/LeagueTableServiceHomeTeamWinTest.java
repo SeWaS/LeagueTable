@@ -100,4 +100,14 @@ public class LeagueTableServiceHomeTeamWinTest {
         assertThat(tp2.getNumberOfVictories()).isEqualTo(0);
         assertThat(tp2.getNumberOfMatchDays()).isEqualTo(1);
     }
+
+    @Test
+    public void shouldCalculateGoalDifference() {
+        // then
+        assertThat(tp1.getGoalsFor()).isEqualTo(1);
+        assertThat(tp1.getGoalsAgainst()).isEqualTo(0);
+
+        assertThat(tp2.getGoalsFor()).isEqualTo(0);
+        assertThat(tp2.getGoalsAgainst()).isEqualTo(1);
+    }
 }

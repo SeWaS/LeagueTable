@@ -213,4 +213,20 @@ public class LeagueTableServiceMatchdayTest {
         assertThat(tp4.getNumberOfVictories()).isEqualTo(1);
         assertThat(tp4.getNumberOfMatchDays()).isEqualTo(3);
     }
+
+    @Test
+    public void shouldCalculateGoalDifference() {
+        // then
+        assertThat(tp1.getGoalsFor()).isEqualTo(6);
+        assertThat(tp1.getGoalsAgainst()).isEqualTo(4);
+
+        assertThat(tp2.getGoalsFor()).isEqualTo(2);
+        assertThat(tp2.getGoalsAgainst()).isEqualTo(4);
+
+        assertThat(tp3.getGoalsFor()).isEqualTo(5);
+        assertThat(tp3.getGoalsAgainst()).isEqualTo(3);
+
+        assertThat(tp4.getGoalsFor()).isEqualTo(4);
+        assertThat(tp4.getGoalsAgainst()).isEqualTo(6);
+    }
 }

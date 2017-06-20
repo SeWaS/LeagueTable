@@ -11,6 +11,8 @@ public class TeamPosition {
     private int numberOfVictories;
     private int numberOfTies;
     private int numberOfLoss;
+    private int goalsFor;
+    private int goalsAgainst;
 
     public int getPosition() {
         return position;
@@ -67,5 +69,29 @@ public class TeamPosition {
     public void addLoss() {
         this.numberOfMatchDays = this.numberOfMatchDays +1;
         this.numberOfLoss = this.numberOfLoss +1;
+    }
+
+    public void addGoalsFor(int goals) {
+        this.goalsFor = this.goalsFor + goals;
+    }
+
+    public int getGoalsFor() {
+        return goalsFor;
+    }
+
+    public void addGoalsAgainst(int goals) {
+        this.goalsAgainst = this.goalsAgainst + goals;
+    }
+
+    public int getGoalsAgainst() {
+        return goalsAgainst;
+    }
+
+    public void setGoalsFor(int goalsFor) {
+        this.goalsFor = goalsFor;
+    }
+
+    public void setGoalsAgainst(int goalsAgainst) {
+        this.goalsAgainst = goalsAgainst;
     }
 }
