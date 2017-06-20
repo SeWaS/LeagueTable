@@ -47,12 +47,4 @@ public class LeagueTable {
             }
         }
     }
-
-    public void updatePoints(TeamPosition tp) {
-        for(TeamPosition t : this.table) {
-            if(t.getTeam().TeamName.equals(tp.getTeam().TeamName)) {
-                t.setPoints(tp.getPoints());
-            }
-        }
-    }
 }

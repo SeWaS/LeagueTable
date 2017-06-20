@@ -46,10 +46,6 @@ public class TeamPosition {
         this.numberOfTies = this.numberOfTies +1;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
     public int getNumberOfMatchDays() {
         return numberOfMatchDays;
     }
@@ -85,13 +81,5 @@ public class TeamPosition {
 
     public int getGoalsAgainst() {
         return goalsAgainst;
-    }
-
-    public void setGoalsFor(int goalsFor) {
-        this.goalsFor = goalsFor;
-    }
-
-    public void setGoalsAgainst(int goalsAgainst) {
-        this.goalsAgainst = goalsAgainst;
     }
 }
