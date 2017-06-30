@@ -10,7 +10,7 @@ public class ListSearch {
 
     public TeamPosition findTeamPositionByTeamname(String teamname, LeagueTable leagueTable) {
         for(TeamPosition t : leagueTable.getTable()) {
-            if(t.getTeam().TeamName.equals(teamname)) {
+            if(t.getTeam().getTeamName().equals(teamname)) {
                 return t;
             }
         }
