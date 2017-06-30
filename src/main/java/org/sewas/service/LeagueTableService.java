@@ -68,7 +68,7 @@ public class LeagueTableService {
 
     private TeamPosition findTeamPositionByTeamName(String teamName, LeagueTable leagueTable) {
         for(TeamPosition t : leagueTable.getTable()) {
-            if(t.getTeam().TeamName.equals(teamName)) {
+            if(t.getTeam().getTeamName().equals(teamName)) {
                 return t;
             }
         }
@@ -82,43 +82,43 @@ public class LeagueTableService {
 
         for (Match match : matches)
         {
-            TeamPosition tp1 = findTeamPositionByTeamName(match.Team1.TeamName, lt);
-            TeamPosition tp2 = findTeamPositionByTeamName(match.Team2.TeamName, lt);
+            TeamPosition tp1 = findTeamPositionByTeamName(match.getTeam1().getTeamName(), lt);
+            TeamPosition tp2 = findTeamPositionByTeamName(match.getTeam2().getTeamName(), lt);
 
             if(tp1 == null) {
                 tp1 = new TeamPosition();
-                tp1.setTeam(match.Team1);
+                tp1.setTeam(match.getTeam1());
                 lt.addTeamPosition(tp1);
             }
 
             if(tp2 == null) {
                 tp2 = new TeamPosition();
-                tp2.setTeam(match.Team2);
+                tp2.setTeam(match.getTeam2());
                 lt.addTeamPosition(tp2);
             }
 
-            if(match.matchResults.get(1).PointsTeam1 > match.matchResults.get(1).PointsTeam2)
+            if(match.getMatchResults().get(1).getPointsTeam1() > match.getMatchResults().get(1).getPointsTeam2())
             {
                 tp1.addVictory();
                 tp2.addLoss();
             }
 
-            if(match.matchResults.get(1).PointsTeam1 == match.matchResults.get(1).PointsTeam2)
+            if(match.getMatchResults().get(1).getPointsTeam1() == match.getMatchResults().get(1).getPointsTeam2())
             {
                 tp1.addTie();
                 tp2.addTie();
             }
 
-            if(match.matchResults.get(1).PointsTeam1 < match.matchResults.get(1).PointsTeam2)
+            if(match.getMatchResults().get(1).getPointsTeam1() < match.getMatchResults().get(1).getPointsTeam2())
             {
                 tp2.addVictory();
                 tp1.addLoss();
             }
 
-            tp1.addGoalsFor(match.matchResults.get(1).PointsTeam1);
-            tp1.addGoalsAgainst(match.matchResults.get(1).PointsTeam2);
-            tp2.addGoalsFor(match.matchResults.get(1).PointsTeam2);
-            tp2.addGoalsAgainst(match.matchResults.get(1).PointsTeam1);
+            tp1.addGoalsFor(match.getMatchResults().get(1).getPointsTeam1());
+            tp1.addGoalsAgainst(match.getMatchResults().get(1).getPointsTeam2());
+            tp2.addGoalsFor(match.getMatchResults().get(1).getPointsTeam2());
+            tp2.addGoalsAgainst(match.getMatchResults().get(1).getPointsTeam1());
         }
 
         return lt;
