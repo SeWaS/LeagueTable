@@ -55,12 +55,12 @@ public class GoalBuilder {
     public Goal build()
     {
         Goal g = new Goal();
-        g.GoalID = this.GoalID;
-        g.ScoreTeam2 = this.ScoreTeam2;
-        g.ScoreTeam1 = this.ScoreTeam1;
-        g.IsPenalty = this.IsPenalty;
-        g.IsOwnGoal = this.IsOwnGoal;
-        g.IsOvertime = this.IsOvertime;
+        g.setGoalID(this.GoalID);
+        g.setScoreTeam1(this.ScoreTeam1);
+        g.setScoreTeam2(this.ScoreTeam2);
+        g.setPenalty(this.IsPenalty);
+        g.setOwnGoal(this.IsOwnGoal);
+        g.setOvertime(this.IsOvertime);
 
         return g;
     }
