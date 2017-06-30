@@ -65,13 +65,13 @@ public class MatchBuilder {
     public Match build()
     {
         Match m = new Match();
-        m.Goal = this.Goal;
-        m.Team2 = this.Team2;
-        m.Team1 = this.Team1;
-        m.NumberOfViewers = this.NumberOfViewers;
-        m.MatchID = this.MatchID;
-        m.Group = this.Group;
-        m.matchResults = this.matchResults;
+        m.setGoal(this.Goal);
+        m.setTeam1(this.Team1);
+        m.setTeam2(this.Team2);
+        m.setNumberOfViewers(this.NumberOfViewers);
+        m.setMatchID(this.MatchID);
+        m.setGroup(this.Group);
+        m.setMatchResults(this.matchResults);
 
         return m;
     }
