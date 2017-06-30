@@ -1,6 +1,6 @@
 package org.sewas.domain.model;
 
-import org.sewas.util.TeamPositionComparator;
+import org.sewas.comparator.TeamPositionComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;

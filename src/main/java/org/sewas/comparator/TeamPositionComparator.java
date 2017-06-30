@@ -1,4 +1,4 @@
-package org.sewas.util;
+package org.sewas.comparator;
 
 import org.sewas.domain.model.TeamPosition;
 
