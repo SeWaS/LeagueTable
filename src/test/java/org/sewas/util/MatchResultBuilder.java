@@ -65,13 +65,13 @@ public class MatchResultBuilder {
     public MatchResult build()
     {
         MatchResult mr = new MatchResult();
-        mr.PointsTeam1 = this.PointsTeam1;
-        mr.PointsTeam2 = this.PointsTeam2;
-        mr.ResultDescription = this.ResultDescription;
-        mr.ResultID = this.ResultID;
-        mr.ResultName = this.ResultName;
-        mr.ResultOrderID = this.ResultOrderID;
-        mr.ResultTypeID = this.ResultTypeID;
+        mr.setPointsTeam1(this.PointsTeam1);
+        mr.setPointsTeam2(this.PointsTeam2);
+        mr.setResultDescription(this.ResultDescription);
+        mr.setResultID(this.ResultID);
+        mr.setResultName(this.ResultName);
+        mr.setResultOrderID(this.ResultOrderID);
+        mr.setResultTypeID(this.ResultTypeID);
 
         return mr;
     }
