@@ -34,9 +34,9 @@ public class GroupBuilder {
     public Group build()
     {
         Group p = new Group();
-        p.GroupOrderID = this.GroupOrderID;
-        p.GroupName = this.GroupName;
-        p.GroupID = this.GroupID;
+        p.setGroupOrderID(this.GroupOrderID);
+        p.setGroupName(this.GroupName);
+        p.setGroupID(this.GroupID);
 
         return p;
     }

@@ -22,11 +22,14 @@ import static org.springframework.http.HttpMethod.GET;
 @Component
 public class OpenLigaDBClient {
 
-    @Autowired
     private RestTemplate restTemplate;
+    private OpenLigaDBConfig openLigaDBConfig;
 
     @Autowired
-    private OpenLigaDBConfig openLigaDBConfig;
+    public OpenLigaDBClient(RestTemplate restTemplate, OpenLigaDBConfig openLigaDBConfig) {
+        this.restTemplate = restTemplate;
+        this.openLigaDBConfig = openLigaDBConfig;
+    }
 
     public MatchDTO getMatchesForLeagueMatchday(String leagueID, String season) throws SeasonNotAvailableException, OpenLigaDbNotOkException {
 
@@ -40,7 +43,7 @@ public class OpenLigaDBClient {
         ResponseEntity<Match[]> Matches;
 
         try{
-            Matches = restTemplate.exchange(url, GET, entity, Match[].class);
+            Matches = this.restTemplate.exchange(url, GET, entity, Match[].class);
         } catch (HttpClientErrorException e) {
             throw new OpenLigaDbNotOkException();
         }

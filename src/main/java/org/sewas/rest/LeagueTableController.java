@@ -17,16 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LeagueTableController implements ILeagueTableApi {
 
-    @Autowired
     private LeagueTableService leagueTableService;
 
+    @Autowired
+    public LeagueTableController(LeagueTableService leagueTableService) {
+        this.leagueTableService = leagueTableService;
+    }
+
     @Override
-    public ResponseEntity<LeagueTable> getCurrentTableForLeague(@PathVariable  String leagueID, @PathVariable String season) throws SeasonNotAvailableException, OpenLigaDbNotOkException {
+    public ResponseEntity<LeagueTable> getCurrentTableForLeague(@PathVariable(name = "leagueID")  String leagueID, @PathVariable(name = "season") String season) throws SeasonNotAvailableException, OpenLigaDbNotOkException {
         return new ResponseEntity<>(this.leagueTableService.returnCurrentLeagueTable(leagueID, season), HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<LeagueTable> getLeagueTableForMatchDay(@PathVariable String leagueID, @PathVariable String season, @PathVariable String matchday) throws MatchdayNotAvailableException, OpenLigaDbNotOkException {
+    public ResponseEntity<LeagueTable> getLeagueTableForMatchDay(@PathVariable(name = "leagueID") String leagueID, @PathVariable(name = "season") String season, @PathVariable(name = "matchday") String matchday) throws MatchdayNotAvailableException, OpenLigaDbNotOkException {
         return new ResponseEntity<>(this.leagueTableService.returnMatchdayLeagueTable(leagueID, season, matchday), HttpStatus.OK);
     }
 

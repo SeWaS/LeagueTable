@@ -10,12 +10,10 @@ import org.sewas.LeagueTableApplication;
 import org.sewas.config.ScenarioConfig;
 import org.sewas.features.stepdefs.steplibs.getCurrentTableStepLib;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 
 import java.io.IOException;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by sebastian on 22/05/17.
@@ -96,5 +94,10 @@ public class getCurrentTableStepDef {
         this.steps.verifyVictoriesForTeamname(teamname, victories);
         this.steps.verifyTiesForTeamname(teamname, ties);
         this.steps.verifyLossForTeamname(teamname, loss);
+    }
+
+    @And("^\"([^\"]*)\" has goal difference of (\\d+):(\\d+)$")
+    public void hasGoalDifferenceOf(String teamname, int goalsFor, int goalsAgainst) {
+        this.steps.verifyGoalDifference(teamname, goalsFor, goalsAgainst);
     }
 }

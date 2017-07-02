@@ -1,13 +1,14 @@
 package org.sewas.service;
 
+import org.sewas.OpenLigaDBConfig;
 import org.sewas.client.OpenLigaDBClient;
+import org.sewas.domain.model.LeagueTable;
+import org.sewas.domain.model.Match;
+import org.sewas.domain.model.TeamPosition;
 import org.sewas.exception.MatchdayNotAvailableException;
 import org.sewas.exception.OpenLigaDbNotOkException;
 import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.rest.dto.MatchDTO;
-import org.sewas.domain.model.LeagueTable;
-import org.sewas.domain.model.Match;
-import org.sewas.domain.model.TeamPosition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,12 @@ import java.util.List;
 @Service
 public class LeagueTableService {
 
-    @Autowired
     private OpenLigaDBClient openLigaDBClient;
+
+    @Autowired
+    public LeagueTableService(OpenLigaDBClient openLigaDBClient) {
+        this.openLigaDBClient = openLigaDBClient;
+    }
 
     public LeagueTable returnCurrentLeagueTable(String leagueID, String season) throws SeasonNotAvailableException, OpenLigaDbNotOkException {
 
@@ -68,7 +73,7 @@ public class LeagueTableService {
 
     private TeamPosition findTeamPositionByTeamName(String teamName, LeagueTable leagueTable) {
         for(TeamPosition t : leagueTable.getTable()) {
-            if(t.getTeam().TeamName.equals(teamName)) {
+            if(t.getTeam().getTeamName().equals(teamName)) {
                 return t;
             }
         }
@@ -82,41 +87,43 @@ public class LeagueTableService {
 
         for (Match match : matches)
         {
-            TeamPosition tp1 = findTeamPositionByTeamName(match.Team1.TeamName, lt);
-            TeamPosition tp2 = findTeamPositionByTeamName(match.Team2.TeamName, lt);
+            TeamPosition tp1 = findTeamPositionByTeamName(match.getTeam1().getTeamName(), lt);
+            TeamPosition tp2 = findTeamPositionByTeamName(match.getTeam2().getTeamName(), lt);
 
             if(tp1 == null) {
                 tp1 = new TeamPosition();
-                tp1.setTeam(match.Team1);
+                tp1.setTeam(match.getTeam1());
                 lt.addTeamPosition(tp1);
             }
 
             if(tp2 == null) {
                 tp2 = new TeamPosition();
-                tp2.setTeam(match.Team2);
+                tp2.setTeam(match.getTeam2());
                 lt.addTeamPosition(tp2);
             }
 
-            if(match.matchResults.get(1).PointsTeam1 > match.matchResults.get(1).PointsTeam2)
+            if(match.getMatchResults().get(1).getPointsTeam1() > match.getMatchResults().get(1).getPointsTeam2())
             {
                 tp1.addVictory();
                 tp2.addLoss();
             }
 
-            if(match.matchResults.get(1).PointsTeam1 == match.matchResults.get(1).PointsTeam2)
+            if(match.getMatchResults().get(1).getPointsTeam1() == match.getMatchResults().get(1).getPointsTeam2())
             {
                 tp1.addTie();
                 tp2.addTie();
             }
 
-            if(match.matchResults.get(1).PointsTeam1 < match.matchResults.get(1).PointsTeam2)
+            if(match.getMatchResults().get(1).getPointsTeam1() < match.getMatchResults().get(1).getPointsTeam2())
             {
                 tp2.addVictory();
                 tp1.addLoss();
             }
 
-            lt.updatePoints(tp1);
-            lt.updatePoints(tp2);
+            tp1.addGoalsFor(match.getMatchResults().get(1).getPointsTeam1());
+            tp1.addGoalsAgainst(match.getMatchResults().get(1).getPointsTeam2());
+            tp2.addGoalsFor(match.getMatchResults().get(1).getPointsTeam2());
+            tp2.addGoalsAgainst(match.getMatchResults().get(1).getPointsTeam1());
         }
 
         return lt;

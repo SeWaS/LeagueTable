@@ -33,9 +33,9 @@ public class TeamBuilder {
 
     public Team build(){
         Team t = new Team();
-        t.TeamName = this.TeamName;
-        t.TeamIconUrl = this.TeamIconUrl;
-        t.TeamId = this.TeamId;
+        t.setTeamName(this.TeamName);
+        t.setTeamIconUrl(this.TeamIconUrl);
+        t.setTeamId(this.TeamId);
 
         return t;
     }

@@ -1,6 +1,6 @@
 package org.sewas.domain.model;
 
-import org.sewas.util.TeamPositionComparator;
+import org.sewas.comparator.TeamPositionComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -44,14 +44,6 @@ public class LeagueTable {
             if(index > 0 && (this.table.get(index).getPoints() == this.table.get(index-1).getPoints()))
             {
                 t.setPosition(index);
-            }
-        }
-    }
-
-    public void updatePoints(TeamPosition tp) {
-        for(TeamPosition t : this.table) {
-            if(t.getTeam().TeamName.equals(tp.getTeam().TeamName)) {
-                t.setPoints(tp.getPoints());
             }
         }
     }
