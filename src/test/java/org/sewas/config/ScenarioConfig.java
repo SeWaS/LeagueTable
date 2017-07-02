@@ -1,5 +1,7 @@
 package org.sewas.config;
 
+import org.sewas.OpenLigaDBConfig;
+import org.sewas.client.OpenLigaDBClient;
 import org.sewas.rest.LeagueTableController;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -19,14 +21,24 @@ import java.util.Arrays;
 public class ScenarioConfig {
 
     @Bean
-    public LeagueTableController leagueTableController()
+    public LeagueTableController leagueTableController(LeagueTableService leagueTableService)
     {
-        return new LeagueTableController();
+        return new LeagueTableController(leagueTableService);
     }
 
     @Bean
-    public LeagueTableService leagueTableService()
+    public LeagueTableService leagueTableService(OpenLigaDBClient openLigaDBClient)
     {
-        return new LeagueTableService();
+        return new LeagueTableService(openLigaDBClient);
+    }
+
+    @Bean
+    public OpenLigaDBClient openLigaDBClient(RestTemplate restTemplate, OpenLigaDBConfig openLigaDBConfig) {
+        return new OpenLigaDBClient(restTemplate, openLigaDBConfig);
+    }
+
+    @Bean
+    public OpenLigaDBConfig openLigaDBConfig() {
+        return new OpenLigaDBConfig();
     }
 }

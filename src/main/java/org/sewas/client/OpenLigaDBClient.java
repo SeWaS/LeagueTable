@@ -43,7 +43,7 @@ public class OpenLigaDBClient {
         ResponseEntity<Match[]> Matches;
 
         try{
-            Matches = restTemplate.exchange(url, GET, entity, Match[].class);
+            Matches = this.restTemplate.exchange(url, GET, entity, Match[].class);
         } catch (HttpClientErrorException e) {
             throw new OpenLigaDbNotOkException();
         }
