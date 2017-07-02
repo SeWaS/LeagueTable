@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LeagueTableController implements ILeagueTableApi {
 
-    @Autowired
     private LeagueTableService leagueTableService;
+
+    @Autowired
+    public LeagueTableController(LeagueTableService leagueTableService) {
+        this.leagueTableService = leagueTableService;
+    }
 
     @Override
     public ResponseEntity<LeagueTable> getCurrentTableForLeague(@PathVariable(name = "leagueID")  String leagueID, @PathVariable(name = "season") String season) throws SeasonNotAvailableException, OpenLigaDbNotOkException {
