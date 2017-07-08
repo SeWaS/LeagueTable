@@ -81,9 +81,10 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+        stage('Publish') {
             steps {
-                echo 'Deploying....'
+                echo 'Publishing'
+                sh './gradlew publishToMavenLocal'
             }
         }
     }
