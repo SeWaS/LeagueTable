@@ -8,13 +8,15 @@ import org.sewas.service.LeagueTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by sebastian on 21/05/17.
  */
-@RestController
+@Controller
 public class LeagueTableController implements ILeagueTableApi {
 
     private LeagueTableService leagueTableService;
@@ -25,13 +27,26 @@ public class LeagueTableController implements ILeagueTableApi {
     }
 
     @Override
-    public ResponseEntity<LeagueTable> getCurrentTableForLeague(@PathVariable(name = "leagueID")  String leagueID, @PathVariable(name = "season") String season) throws SeasonNotAvailableException, OpenLigaDbNotOkException {
-        return new ResponseEntity<>(this.leagueTableService.returnCurrentLeagueTable(leagueID, season), HttpStatus.OK);
+    public String getCurrentTableForLeague(@PathVariable("leagueID")  String leagueID,
+                                           @PathVariable("season") String season,
+                                           Model model) throws OpenLigaDbNotOkException, SeasonNotAvailableException {
+        LeagueTable lt = this.leagueTableService.returnCurrentLeagueTable(leagueID, season);
+        model.addAttribute("leagueID", leagueID);
+        model.addAttribute("season", season);
+        model.addAttribute("leagueTable", lt);
+        return "currentMatchday";
     }
 
     @Override
-    public ResponseEntity<LeagueTable> getLeagueTableForMatchDay(@PathVariable(name = "leagueID") String leagueID, @PathVariable(name = "season") String season, @PathVariable(name = "matchday") String matchday) throws MatchdayNotAvailableException, OpenLigaDbNotOkException {
-        return new ResponseEntity<>(this.leagueTableService.returnMatchdayLeagueTable(leagueID, season, matchday), HttpStatus.OK);
+    public String getLeagueTableForMatchDay(@PathVariable("leagueID") String leagueID,
+                                            @PathVariable("season") String season,
+                                            @PathVariable("matchday") String matchday,
+                                            Model model) throws MatchdayNotAvailableException, OpenLigaDbNotOkException {
+        LeagueTable lt = this.leagueTableService.returnMatchdayLeagueTable(leagueID, season, matchday);
+        model.addAttribute("leagueID", leagueID);
+        model.addAttribute("season", season);
+        model.addAttribute("leagueTable", lt);
+        return "currentMatchday";
     }
 
 }

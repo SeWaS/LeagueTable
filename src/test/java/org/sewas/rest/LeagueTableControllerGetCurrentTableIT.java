@@ -20,7 +20,9 @@ import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyString;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 /**
  * Created by sebastian on 10/06/17.
@@ -41,7 +43,10 @@ public class LeagueTableControllerGetCurrentTableIT {
         given(this.leagueTableService.returnCurrentLeagueTable(anyString(), anyString())).willReturn(new LeagueTable());
 
         this.mockMvc.perform(get("/api/leagueTable/1234/2016").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(view().name("currentMatchday"))
+                .andExpect(model().attributeExists("leagueID", "season", "leagueTable"))
+        ;
 
         verify(this.leagueTableService, times(1)).returnCurrentLeagueTable("1234", "2016");
     }

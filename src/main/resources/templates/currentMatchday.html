@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <span th:text="'League: '+${leagueID}">League</span>
+    <span th:text="'Season: '+${season}">League</span>
+
+    <table>
+        <tr>
+            <td></td>
+            <td colspan="2">Team</td>
+            <td>Matchdays</td>
+            <td>Goals</td>
+            <td>V</td>
+            <td>T</td>
+            <td>L</td>
+            <td>Points</td>
+        </tr>
+
+        <tr th:each="teamPosition : ${leagueTable.table}">
+            <td th:text="${teamPosition.position}">Position</td>
+            <td><img th:src="${teamPosition.Team.TeamIconUrl}" style="width:20px;"/></td>
+            <td th:text="${teamPosition.Team.TeamName}">Name</td>
+            <td th:text="${teamPosition.numberOfMatchDays}">36</td>
+            <td th:text="${teamPosition.goalsFor} +':'+${teamPosition.goalsAgainst}">0:0</td>
+            <td th:text="${teamPosition.numberOfVictories}">0</td>
+            <td th:text="${teamPosition.numberOfTies}">0</td>
+            <td th:text="${teamPosition.numberOfLoss}">0</td>
+            <td th:text="${teamPosition.points}">Points</td>
+        </tr>
+    </table>
+</body>
+</html>
