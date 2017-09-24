@@ -1,4 +1,4 @@
-package org.sewas.util.testmarker;
+package testing.testmarker;
 
 /**
  * Created by sebastian on 01/06/17.

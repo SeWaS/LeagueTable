@@ -7,13 +7,13 @@ import org.sewas.domain.model.LeagueTable;
 import org.sewas.exception.OpenLigaDbNotOkException;
 import org.sewas.exception.SeasonNotAvailableException;
 import org.sewas.service.LeagueTableService;
-import org.sewas.util.testmarker.IntegrationTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import testing.testmarker.IntegrationTest;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;

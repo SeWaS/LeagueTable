@@ -10,7 +10,6 @@ import org.sewas.domain.model.Match;
 import org.sewas.exception.MatchdayNotAvailableException;
 import org.sewas.exception.OpenLigaDbNotOkException;
 import org.sewas.rest.dto.MatchDTO;
-import org.sewas.util.testmarker.IntegrationTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.http.HttpStatus;
@@ -18,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
+import testing.testmarker.IntegrationTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
