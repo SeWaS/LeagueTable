@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
-import org.sewas.config.ClientTestConfig;
 import org.sewas.domain.model.Match;
 import org.sewas.exception.OpenLigaDbNotOkException;
 import org.sewas.exception.SeasonNotAvailableException;

@@ -1,4 +1,4 @@
-package org.sewas.config;
+package org.sewas.features;
 
 import org.sewas.OpenLigaDBConfig;
 import org.sewas.client.OpenLigaDBClient;

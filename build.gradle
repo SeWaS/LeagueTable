@@ -104,3 +104,29 @@ task unitAndITcoverageReport(type: JacocoReport) {
     executionData runUnitTests, runIntegrationTests
     sourceSets sourceSets.main
 }
+
+sourceSets {
+
+    test {
+        test.java.srcDir "src/test/java"
+        test.resources.srcDir "src/test/resources"
+    }
+
+    main {
+        main.java.srcDir "src/main/java"
+        main.resources.srcDir "src/main/resources"
+    }
+
+    integration {
+        test.java.srcDir "src/integration/java"
+        test.resources.srcDir "src/integration/resources"
+        compileClasspath += sourceSets.test.runtimeClasspath
+    }
+
+    acceptance {
+        test.java.srcDir "src/acceptance/java"
+        test.resources.srcDir "src/acceptance/resources"
+        compileClasspath += sourceSets.test.runtimeClasspath
+    }
+
+}
