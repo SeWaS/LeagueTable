@@ -1,10 +1,10 @@
-package org.sewas.features.stepdefs.steplibs;
+package org.sewas.features.currentleaguetable.steplibs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.sewas.domain.model.LeagueTable;
 import org.sewas.domain.model.Match;
 import org.sewas.domain.model.TeamPosition;
-import org.sewas.features.util.World;
+import org.sewas.features.currentleaguetable.data.getCurrentTableStepData;
 import org.sewas.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -23,19 +23,19 @@ public class getCurrentTableStepLib
 {
 
     @Autowired
-    private World world;
+    private getCurrentTableStepData getCurrentTableStepData;
 
     @Autowired
     private TestRestTemplate testRestTemplate;
 
     public void requestCurrentSeason()
     {
-        this.world.setResponse(this.testRestTemplate.getForEntity("/api/leagueTable/"+this.world.getLeagueID()+"/2016", LeagueTable.class));
+        this.getCurrentTableStepData.setResponse(this.testRestTemplate.getForEntity("/api/leagueTable/"+this.getCurrentTableStepData.getLeagueID()+"/2016", LeagueTable.class));
     }
 
     public void verifyThatAllTeamsHaveZeroPints()
     {
-        LeagueTable responseLeagueTable = this.world.getResponse().getBody();
+        LeagueTable responseLeagueTable = this.getCurrentTableStepData.getResponse().getBody();
 
         assertThat(responseLeagueTable.getTable().size()).isEqualTo(0);
 
@@ -47,16 +47,16 @@ public class getCurrentTableStepLib
 
     public void createLeague(String leagueID)
     {
-        this.world.setLeagueId(leagueID);
+        this.getCurrentTableStepData.setLeagueId(leagueID);
     }
 
     public void initWireMock() throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        String stubJson = objectMapper.writeValueAsString(this.world.getMatches());
+        String stubJson = objectMapper.writeValueAsString(this.getCurrentTableStepData.getMatches());
 
-        stubFor(get(urlEqualTo("/api/getmatchdata/"+this.world.getLeagueID()+"/2016"))
+        stubFor(get(urlEqualTo("/api/getmatchdata/"+this.getCurrentTableStepData.getLeagueID()+"/2016"))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withBody(stubJson)));
@@ -91,11 +91,11 @@ public class getCurrentTableStepLib
                 .withNumberOfViewers(10000)
                 .build();
 
-        this.world.addMatch(match);
+        this.getCurrentTableStepData.addMatch(match);
     }
 
     public void verifyThatTeamHasPoints(String teamname, int place, int points) {
-        LeagueTable receivedLeagueTable = this.world.getResponse().getBody();
+        LeagueTable receivedLeagueTable = this.getCurrentTableStepData.getResponse().getBody();
 
         ListSearch listSearch = new ListSearch();
 
@@ -106,11 +106,11 @@ public class getCurrentTableStepLib
     }
 
     public void resetPlayedMatches() {
-        this.world.resetMatches();
+        this.getCurrentTableStepData.resetMatches();
     }
 
     public void verifyNumberOfMatchdaysForTeam(String teamname, int numberOfMatchdays) {
-        LeagueTable receivedLeagueTable = this.world.getResponse().getBody();
+        LeagueTable receivedLeagueTable = this.getCurrentTableStepData.getResponse().getBody();
 
         ListSearch listSearch = new ListSearch();
 
@@ -120,7 +120,7 @@ public class getCurrentTableStepLib
     }
 
     public void verifyVictoriesForTeamname(String teamname, int victories) {
-        LeagueTable receivedLeagueTable = this.world.getResponse().getBody();
+        LeagueTable receivedLeagueTable = this.getCurrentTableStepData.getResponse().getBody();
 
         ListSearch listSearch = new ListSearch();
 
@@ -130,7 +130,7 @@ public class getCurrentTableStepLib
     }
 
     public void verifyTiesForTeamname(String teamname, int ties) {
-        LeagueTable receivedLeagueTable = this.world.getResponse().getBody();
+        LeagueTable receivedLeagueTable = this.getCurrentTableStepData.getResponse().getBody();
 
         ListSearch listSearch = new ListSearch();
 
@@ -140,7 +140,7 @@ public class getCurrentTableStepLib
     }
 
     public void verifyLossForTeamname(String teamname, int loss) {
-        LeagueTable receivedLeagueTable = this.world.getResponse().getBody();
+        LeagueTable receivedLeagueTable = this.getCurrentTableStepData.getResponse().getBody();
 
         ListSearch listSearch = new ListSearch();
 
@@ -150,7 +150,7 @@ public class getCurrentTableStepLib
     }
 
     public void verifyGoalDifference(String teamname, int goalsFor, int goalsAgainst) {
-        LeagueTable receivedLeagueTable = this.world.getResponse().getBody();
+        LeagueTable receivedLeagueTable = this.getCurrentTableStepData.getResponse().getBody();
 
         ListSearch listSearch = new ListSearch();
 

@@ -1,4 +1,4 @@
-package org.sewas.features.stepdefs;
+package org.sewas.features.currentleaguetable;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -8,7 +8,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.sewas.LeagueTableApplication;
 import org.sewas.features.ScenarioConfig;
-import org.sewas.features.stepdefs.steplibs.getCurrentTableStepLib;
+import org.sewas.features.currentleaguetable.steplibs.getCurrentTableStepLib;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;

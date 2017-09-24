@@ -1,4 +1,4 @@
-package org.sewas.features.stepdefs;
+package org.sewas.features.matchdayleaguetable;
 
 import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
@@ -6,7 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.sewas.LeagueTableApplication;
 import org.sewas.features.ScenarioConfig;
-import org.sewas.features.stepdefs.steplibs.getMatchdayTableStepLib;
+import org.sewas.features.matchdayleaguetable.steplibs.getMatchdayTableStepLib;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;

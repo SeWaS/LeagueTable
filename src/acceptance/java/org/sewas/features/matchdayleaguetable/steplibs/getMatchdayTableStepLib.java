@@ -1,9 +1,10 @@
-package org.sewas.features.stepdefs.steplibs;
+package org.sewas.features.matchdayleaguetable.steplibs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.sewas.domain.model.LeagueTable;
 import org.sewas.domain.model.Match;
-import org.sewas.features.util.World;
+import org.sewas.features.currentleaguetable.data.getCurrentTableStepData;
+import org.sewas.features.matchdayleaguetable.data.getMatchdayTableStepData;
 import org.sewas.util.MatchBuilder;
 import org.sewas.util.MatchResultBuilder;
 import org.sewas.util.TeamBuilder;
@@ -23,13 +24,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class getMatchdayTableStepLib {
 
     @Autowired
-    private World world;
+    private getMatchdayTableStepData getMatchdayTableStepData;
 
     @Autowired
     private TestRestTemplate testRestTemplate;
 
     public void setLeagueID(String leagueID) {
-        this.world.setLeagueId(leagueID);
+        this.getMatchdayTableStepData.setLeagueId(leagueID);
     }
 
     public void generateMatchesForLeague(int numOfMatchdays) {
@@ -81,33 +82,33 @@ public class getMatchdayTableStepLib {
 
             Match[] matchday = {match1, match2};
 
-            this.world.addMatchDay(matchday);
+            this.getMatchdayTableStepData.addMatchDay(matchday);
         }
     }
 
     public void requestMatchdayTable(int requestedMatchday) {
-        String url = "/api/leagueTable/"+this.world.getLeagueID()+"/2016/" + requestedMatchday;
-        this.world.setFetchForMatchdayResponse(this.testRestTemplate.getForEntity(url, LeagueTable.class));
+        String url = "/api/leagueTable/"+this.getMatchdayTableStepData.getLeagueID()+"/2016/" + requestedMatchday;
+        this.getMatchdayTableStepData.setFetchForMatchdayResponse(this.testRestTemplate.getForEntity(url, LeagueTable.class));
     }
 
     public void initWiremock(int requestedMatchday) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
-        Integer numOfMatchdays = this.world.getPlayedMatchDays().size();
+        Integer numOfMatchdays = this.getMatchdayTableStepData.getPlayedMatchDays().size();
 
         for(int i=1;i<= numOfMatchdays;i++) {
-            stubFor(get(urlEqualTo("/api/getmatchdata/"+this.world.getLeagueID()+"/2016/"+i))
+            stubFor(get(urlEqualTo("/api/getmatchdata/"+this.getMatchdayTableStepData.getLeagueID()+"/2016/"+i))
                     .willReturn(aResponse()
                             .withStatus(200)
                             .withBody(
-                                    objectMapper.writeValueAsString(this.world.getPlayedMatchDays().get(i-1))
+                                    objectMapper.writeValueAsString(this.getMatchdayTableStepData.getPlayedMatchDays().get(i-1))
                             )));
 
         }
 
         // Asking for a not available matchday
         if(requestedMatchday > numOfMatchdays) {
-            stubFor(get(urlEqualTo("/api/getmatchdata/"+this.world.getLeagueID()+"/2016/"+requestedMatchday))
+            stubFor(get(urlEqualTo("/api/getmatchdata/"+this.getMatchdayTableStepData.getLeagueID()+"/2016/"+requestedMatchday))
                     .willReturn(aResponse()
                             .withStatus(200)
                             .withBody("[]")));
@@ -116,21 +117,21 @@ public class getMatchdayTableStepLib {
     }
 
     public void verifyThatCorrectLeagueWasReceived(String leagueID) {
-        assertThat(this.world.getResponseForMatchdayTable().getBody().getLeagueID()).isEqualTo(leagueID);
+        assertThat(this.getMatchdayTableStepData.getResponseForMatchdayTable().getBody().getLeagueID()).isEqualTo(leagueID);
     }
 
     public void verifyThatCorrectMatchdayWasReceives(int requestedMatchday) {
-        assertThat(this.world.getResponseForMatchdayTable().getStatusCodeValue()).isEqualTo(200);
-        assertThat(this.world.getResponseForMatchdayTable().getBody().getTable().get(0).getNumberOfMatchDays()).isEqualTo(requestedMatchday);
+        assertThat(this.getMatchdayTableStepData.getResponseForMatchdayTable().getStatusCodeValue()).isEqualTo(200);
+        assertThat(this.getMatchdayTableStepData.getResponseForMatchdayTable().getBody().getTable().get(0).getNumberOfMatchDays()).isEqualTo(requestedMatchday);
     }
 
     public void verifyThatNoLeagueTableHasBeenReceived() {
-        assertThat(this.world.getResponseForMatchdayTable().getStatusCodeValue()).isEqualTo(404);
-        assertThat(this.world.getResponseForMatchdayTable().getBody().getLeagueID()).isNull();
-        assertThat(this.world.getResponseForMatchdayTable().getBody().getTable().size()).isEqualTo(0);
+        assertThat(this.getMatchdayTableStepData.getResponseForMatchdayTable().getStatusCodeValue()).isEqualTo(404);
+        assertThat(this.getMatchdayTableStepData.getResponseForMatchdayTable().getBody().getLeagueID()).isNull();
+        assertThat(this.getMatchdayTableStepData.getResponseForMatchdayTable().getBody().getTable().size()).isEqualTo(0);
     }
 
     public void resetPlayedMatchdays() {
-        this.world.resetMatchdays();
+        this.getMatchdayTableStepData.resetMatchdays();
     }
 }

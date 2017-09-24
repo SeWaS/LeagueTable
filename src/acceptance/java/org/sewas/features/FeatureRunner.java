@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.rules.SpringMethodRule;
  */
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(features = "classpath:features")
-public class ScenarioRunner {
+public class FeatureRunner {
 
     @ClassRule
     public static final SpringClassRule SPRING_CLASS_RULE = new SpringClassRule();

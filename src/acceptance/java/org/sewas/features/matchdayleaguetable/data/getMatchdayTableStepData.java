@@ -1,4 +1,4 @@
-package org.sewas.features.util;
+package org.sewas.features.matchdayleaguetable.data;
 
 import org.sewas.domain.model.LeagueTable;
 import org.sewas.domain.model.Match;
@@ -13,7 +13,7 @@ import java.util.List;
  * Created by sebastian on 22/05/17.
  */
 @Component
-public class World {
+public class getMatchdayTableStepData {
 
     private LeagueTable leagueTable = new LeagueTable();
     private ResponseEntity<LeagueTable> response;
