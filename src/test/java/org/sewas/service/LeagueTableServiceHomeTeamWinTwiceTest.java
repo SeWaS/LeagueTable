@@ -59,6 +59,7 @@ public class LeagueTableServiceHomeTeamWinTwiceTest {
                         .withPointsForTeam1(1)
                         .withPointsForTeam2(0)
                         .build())
+                .isFinished(true)
                 .build();
 
         Match mockMatch2 = new MatchBuilder()
@@ -76,6 +77,7 @@ public class LeagueTableServiceHomeTeamWinTwiceTest {
                         .withPointsForTeam1(1)
                         .withPointsForTeam2(0)
                         .build())
+                .isFinished(true)
                 .build();
 
         MatchDTO mockMatchDto = new MatchDTO();

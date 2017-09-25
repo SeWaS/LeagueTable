@@ -35,6 +35,9 @@ public class Match {
     @JsonProperty("MatchResults")
     private List<MatchResult> matchResults;
 
+    @JsonProperty("MatchIsFinished")
+    private Boolean matchIsFinished;
+
     public int getMatchID() {
         return MatchID;
     }
@@ -89,5 +92,13 @@ public class Match {
 
     public void setMatchResults(List<MatchResult> matchResults) {
         this.matchResults = matchResults;
+    }
+
+    public Boolean getMatchIsFinished() {
+        return matchIsFinished;
+    }
+
+    public void setMatchIsFinished(Boolean matchIsFinished) {
+        this.matchIsFinished = matchIsFinished;
     }
 }

@@ -61,6 +61,7 @@ public class LeagueTableServiceMatchdayTest {
                         .withPointsForTeam1(1)
                         .withPointsForTeam2(1)
                         .build())
+                .isFinished(true)
                 .build();
 
         Match match2 = new MatchBuilder()
@@ -78,6 +79,7 @@ public class LeagueTableServiceMatchdayTest {
                         .withPointsForTeam1(2)
                         .withPointsForTeam2(1)
                         .build())
+                .isFinished(true)
                 .build();
 
         MatchDTO mockMatchDtoDay1 = new MatchDTO();
@@ -98,6 +100,7 @@ public class LeagueTableServiceMatchdayTest {
                         .withPointsForTeam1(3)
                         .withPointsForTeam2(1)
                         .build())
+                .isFinished(true)
                 .build();
 
         Match match4 = new MatchBuilder()
@@ -115,6 +118,7 @@ public class LeagueTableServiceMatchdayTest {
                         .withPointsForTeam1(0)
                         .withPointsForTeam2(1)
                         .build())
+                .isFinished(true)
                 .build();
 
         MatchDTO mockMatchDtoDay2 = new MatchDTO();
@@ -135,6 +139,7 @@ public class LeagueTableServiceMatchdayTest {
                         .withPointsForTeam1(1)
                         .withPointsForTeam2(2)
                         .build())
+                .isFinished(true)
                 .build();
 
         Match match6 = new MatchBuilder()
@@ -152,6 +157,7 @@ public class LeagueTableServiceMatchdayTest {
                         .withPointsForTeam1(2)
                         .withPointsForTeam2(2)
                         .build())
+                .isFinished(true)
                 .build();
 
         MatchDTO mockMatchDtoDay3 = new MatchDTO();

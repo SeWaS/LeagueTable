@@ -16,6 +16,7 @@ public class MatchBuilder {
     private int NumberOfViewers;
     private org.sewas.domain.model.Group Group;
     private List<MatchResult> matchResults = new ArrayList<MatchResult>();
+    private Boolean isMatchFinished;
 
     public MatchBuilder()
     {}
@@ -62,6 +63,11 @@ public class MatchBuilder {
         return this;
     }
 
+    public MatchBuilder isFinished(Boolean isMatchFinished) {
+        this.isMatchFinished = isMatchFinished;
+        return this;
+    }
+
     public Match build()
     {
         Match m = new Match();
@@ -72,6 +78,7 @@ public class MatchBuilder {
         m.setMatchID(this.MatchID);
         m.setGroup(this.Group);
         m.setMatchResults(this.matchResults);
+        m.setMatchIsFinished(this.isMatchFinished);
 
         return m;
     }
