@@ -55,42 +55,18 @@ public class getCurrentTableStepDef {
         this.steps.addMatch(team1, team2, scoreTeam1, scoreTeam2);
     }
 
-    @Then("^\"([^\"]*)\" is on place (\\d+) with (\\d+) points$")
+    @Then("^\"([^\"]*)\" is on place (\\d+) with (\\d+) (?:point|points)$")
     public void isOnPlaceWithPoints(String teamname, int place, int points) throws Throwable {
         this.steps.verifyThatTeamHasPoints(teamname, place, points);
     }
 
-    @And("^\"([^\"]*)\" is on place (\\d+) with (\\d+) point$")
-    public void isOnPlaceWithPoint(String teamname, int place, int points)  {
-        this.steps.verifyThatTeamHasPoints(teamname, place, points);
-    }
-
-    @And("^\"([^\"]*)\" has (\\d+) matchday played$")
+    @And("^\"([^\"]*)\" has (\\d+) (?:matchday|matchdays) played$")
     public void hasMatchdayPlayed(String teamname, int numberOfMatchdays)  {
         this.steps.verifyNumberOfMatchdaysForTeam(teamname, numberOfMatchdays);
     }
 
-    @And("^\"([^\"]*)\" has (\\d+) matchdays played$")
-    public void hasMatchdaysPlayed(String teamname, int numberOfMatchdays) {
-        this.steps.verifyNumberOfMatchdaysForTeam(teamname, numberOfMatchdays);
-    }
-
-    @And("^\"([^\"]*)\" has (\\d+) victory, (\\d+) ties and (\\d+) loss$")
+    @And("^\"([^\"]*)\" has (\\d+) (?:victory|victories), (\\d+) (?:tie|ties) and (\\d+) loss$")
     public void hasVictoryTiesAndLoss(String teamname, int victories, int ties, int loss) {
-        this.steps.verifyVictoriesForTeamname(teamname, victories);
-        this.steps.verifyTiesForTeamname(teamname, ties);
-        this.steps.verifyLossForTeamname(teamname, loss);
-    }
-
-    @And("^\"([^\"]*)\" has (\\d+) victories, (\\d+) tie and (\\d+) loss$")
-    public void hasVictoriesTieAndLoss(String teamname, int victories, int ties, int loss) {
-        this.steps.verifyVictoriesForTeamname(teamname, victories);
-        this.steps.verifyTiesForTeamname(teamname, ties);
-        this.steps.verifyLossForTeamname(teamname, loss);
-    }
-
-    @And("^\"([^\"]*)\" has (\\d+) victories, (\\d+) ties and (\\d+) loss$")
-    public void hasVictoriesTiesAndLoss(String teamname, int victories, int ties, int loss) {
         this.steps.verifyVictoriesForTeamname(teamname, victories);
         this.steps.verifyTiesForTeamname(teamname, ties);
         this.steps.verifyLossForTeamname(teamname, loss);
