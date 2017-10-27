@@ -1,3 +1,4 @@
 rootProject.name = 'currentleaguetable'
 include 'testmarker'
+include 'util'
 

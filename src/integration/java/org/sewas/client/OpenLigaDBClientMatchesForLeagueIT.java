@@ -17,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
+import utils.testing.IntegrationTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -26,6 +27,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 /**
  * Created by sebastian on 11/06/17.
  */
+@Category(IntegrationTest.class)
 @RunWith(SpringRunner.class)
 @RestClientTest(OpenLigaDBClient.class)
 @ContextConfiguration(classes = {ClientTestConfig.class})

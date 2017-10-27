@@ -13,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import utils.testing.IntegrationTest;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -26,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Created by sebastian on 10/06/17.
  */
+@Category(IntegrationTest.class)
 @RunWith(SpringRunner.class)
 @WebMvcTest(LeagueTableController.class)
 public class LeagueTableControllerGetCurrentTableIT {
