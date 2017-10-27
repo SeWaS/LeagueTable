@@ -24,7 +24,7 @@ pipeline {
         stage('Integration Tests') {
             steps {
                 echo 'Start IntegrationTests'
-                sh './gradlew runIntegrationTests'
+                sh './gradlew runAcceptanceTests'
             }
         }
         stage('Acceptance Tests') {
