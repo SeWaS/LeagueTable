@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
@@ -29,6 +30,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
  */
 @Category(IntegrationTest.class)
 @RunWith(SpringRunner.class)
+@ActiveProfiles("clientTest")
 @RestClientTest(OpenLigaDBClient.class)
 @ContextConfiguration(classes = {ClientTestConfig.class})
 public class OpenLigaDBClientMatchesForLeagueIT {
