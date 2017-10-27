@@ -16,7 +16,7 @@ public class MatchBuilder {
     private int NumberOfViewers;
     private org.sewas.domain.model.Group Group;
     private List<MatchResult> matchResults = new ArrayList<MatchResult>();
-    private Boolean isMatchFinished;
+    private Boolean isMatchFinished = true;
 
     public MatchBuilder()
     {}

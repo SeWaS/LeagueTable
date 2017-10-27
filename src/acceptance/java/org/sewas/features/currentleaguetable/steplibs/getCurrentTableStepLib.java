@@ -30,7 +30,9 @@ public class getCurrentTableStepLib
 
     public void requestCurrentSeason()
     {
-        this.getCurrentTableStepData.setResponse(this.testRestTemplate.getForEntity("/api/leagueTable/"+this.getCurrentTableStepData.getLeagueID()+"/2016", LeagueTable.class));
+        this.getCurrentTableStepData.setResponse(
+                this.testRestTemplate.getForEntity("/api/leagueTable/"+this.getCurrentTableStepData.getLeagueID()+"/2016", LeagueTable.class)
+        );
     }
 
     public void verifyThatAllTeamsHaveZeroPints()

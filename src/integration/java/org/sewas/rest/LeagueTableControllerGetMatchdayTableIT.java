@@ -41,8 +41,6 @@ public class LeagueTableControllerGetMatchdayTableIT {
 
         this.mockMvc.perform(get("/api/leagueTable/1234/2016/18").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(view().name("currentMatchday"))
-                .andExpect(model().attributeExists("leagueID", "season", "leagueTable"))
         ;
 
         verify(this.leagueTableService, times(1)).returnMatchdayLeagueTable("1234", "2016", "18");
