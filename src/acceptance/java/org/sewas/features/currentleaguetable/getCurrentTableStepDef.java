@@ -12,12 +12,14 @@ import org.sewas.features.currentleaguetable.steplibs.getCurrentTableStepLib;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 
 /**
  * Created by sebastian on 22/05/17.
  */
+@ActiveProfiles("wiremock")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = {LeagueTableApplication.class, ScenarioConfig.class})
 @AutoConfigureWireMock(port = 1234)
