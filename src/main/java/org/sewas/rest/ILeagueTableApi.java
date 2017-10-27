@@ -19,4 +19,5 @@ public interface ILeagueTableApi {
 
     @GetMapping(path = "{leagueID}/{season}/{matchday}")
     ResponseEntity<LeagueTable> getLeagueTableForMatchDay(String leagueID, String season, String matchday) throws MatchdayNotAvailableException, OpenLigaDbNotOkException;
+
 }

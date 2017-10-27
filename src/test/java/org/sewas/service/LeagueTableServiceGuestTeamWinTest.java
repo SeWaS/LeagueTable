@@ -59,6 +59,7 @@ public class LeagueTableServiceGuestTeamWinTest {
                         .withPointsForTeam1(0)
                         .withPointsForTeam2(1)
                         .build())
+                .isFinished(true)
                 .build();
 
         MatchDTO mockMatchDto = new MatchDTO();

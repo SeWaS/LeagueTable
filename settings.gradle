@@ -1,2 +1,4 @@
-rootProject.name = 'leaguetable'
+rootProject.name = 'currentleaguetable'
+include 'testmarker'
+include 'util'
 

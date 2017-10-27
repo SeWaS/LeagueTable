@@ -24,11 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyString;
 
-/**
- * Created by sebastian on 16/06/17.
- */
 @RunWith(MockitoJUnitRunner.class)
-public class LeagueTableServiceTieTest {
+public class LeagueTableServiceSeasonNotFullyPlayedTest {
 
     @InjectMocks
     private LeagueTableService underTest;
@@ -44,7 +41,7 @@ public class LeagueTableServiceTieTest {
         ListSearch listSearch = new ListSearch();
 
         // given
-        Match match4test = new MatchBuilder()
+        Match mockMatch1 = new MatchBuilder()
                 .withTeam1(new TeamBuilder()
                         .withTeamName("HomeTeam")
                         .build())
@@ -57,13 +54,24 @@ public class LeagueTableServiceTieTest {
                         .build())
                 .withResult(new MatchResultBuilder()
                         .withPointsForTeam1(1)
-                        .withPointsForTeam2(1)
+                        .withPointsForTeam2(0)
                         .build())
                 .isFinished(true)
                 .build();
 
+        Match mockMatch2 = new MatchBuilder()
+                .withTeam1(new TeamBuilder()
+                        .withTeamName("HomeTeam")
+                        .build())
+                .withTeam2(new TeamBuilder()
+                        .withTeamName("GuestTeam")
+                        .build())
+                .withResult(null)
+                .isFinished(false)
+                .build();
+
         MatchDTO mockMatchDto = new MatchDTO();
-        mockMatchDto.setMatches(Arrays.asList(match4test));
+        mockMatchDto.setMatches(Arrays.asList(mockMatch1, mockMatch2));
 
         given(this.mockClient.getMatchesForLeagueMatchday(anyString(), anyString())).willReturn(mockMatchDto);
 
@@ -77,38 +85,8 @@ public class LeagueTableServiceTieTest {
     @Test
     public void shouldCalculatePoints() {
         // then
-        assertThat(this.tp1.getPoints()).isEqualTo(1);
-        assertThat(this.tp2.getPoints()).isEqualTo(1);
+        assertThat(this.tp1.getPoints()).isEqualTo(3);
+        assertThat(this.tp2.getPoints()).isEqualTo(0);
     }
 
-    @Test
-    public void shouldCalculatePositions() {
-        // then
-        assertThat(this.tp1.getPosition()).isEqualTo(1);
-        assertThat(this.tp2.getPosition()).isEqualTo(1);
-    }
-
-    @Test
-    public void shouldCalculateVictoryTieLoss() {
-        // then
-        assertThat(tp1.getNumberOfLoss()).isEqualTo(0);
-        assertThat(tp1.getNumberOfTies()).isEqualTo(1);
-        assertThat(tp1.getNumberOfVictories()).isEqualTo(0);
-        assertThat(tp1.getNumberOfMatchDays()).isEqualTo(1);
-
-        assertThat(tp2.getNumberOfLoss()).isEqualTo(0);
-        assertThat(tp2.getNumberOfTies()).isEqualTo(1);
-        assertThat(tp2.getNumberOfVictories()).isEqualTo(0);
-        assertThat(tp2.getNumberOfMatchDays()).isEqualTo(1);
-    }
-
-    @Test
-    public void shouldCalculateGoalDifference() {
-        // then
-        assertThat(tp1.getGoalsFor()).isEqualTo(1);
-        assertThat(tp1.getGoalsAgainst()).isEqualTo(1);
-
-        assertThat(tp2.getGoalsFor()).isEqualTo(1);
-        assertThat(tp2.getGoalsAgainst()).isEqualTo(1);
-    }
 }

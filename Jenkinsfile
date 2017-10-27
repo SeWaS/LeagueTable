@@ -30,7 +30,7 @@ pipeline {
         stage('Acceptance Tests') {
             steps {
                 echo 'Start AcceptanceTests'
-                sh './gradlew runFeatureTests'
+                sh './gradlew runAcceptanceTests'
             }
         }
         stage('Reporting') {

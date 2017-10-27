@@ -87,6 +87,11 @@ public class LeagueTableService {
 
         for (Match match : matches)
         {
+
+            if(!match.getMatchIsFinished()) {
+                break;
+            }
+
             TeamPosition tp1 = findTeamPositionByTeamName(match.getTeam1().getTeamName(), lt);
             TeamPosition tp2 = findTeamPositionByTeamName(match.getTeam2().getTeamName(), lt);
 

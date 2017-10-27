@@ -44,12 +44,15 @@ dependencies {
     testCompile group: 'net.serenity-bdd', name: 'serenity-cucumber', version: '1.1.23'
     testCompile group: 'net.serenity-bdd', name: 'serenity-spring', version: '1.2.2'
 
+    compile project(':util')
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.0.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '1.5.0.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '1.5.0.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.0.RELEASE'
     compile group: 'com.h2database', name: 'h2', version: '1.3.148'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-test-autoconfigure', version: '1.5.0.RELEASE'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-test', version: '1.5.0.RELEASE'
@@ -61,24 +64,44 @@ dependencies {
 gradle.startParameter.continueOnFailure = true
 
 task runUnitTests(type: Test) {
+
+    description = "Runs all unit tests for leagueTable"
+
+    group 'testing'
+
     exclude 'org/sewas/features/**'
     useJUnit {
-        excludeCategories 'org.sewas.util.testmarker.IntegrationTest'
+        excludeCategories 'utils.testing.IntegrationTest'
     }
 }
 
 task runIntegrationTests(type: Test) {
+
+    description = "Runs all Integration tests annotated with '@Category(IntegrationTest.class)'"
+
+    group 'testing'
+
     exclude 'org/sewas/features/**'
     useJUnit {
-        includeCategories 'org.sewas.util.testmarker.IntegrationTest'
+        includeCategories 'utils.testing.IntegrationTest'
     }
 }
 
-task runFeatureTests(type: Test) {
+task runAcceptanceTests(type: Test) {
+
+    description = "Runs all Acceptance tests"
+
+    group 'testing'
+
     include 'org/sewas/features/**'
 }
 
 task unitTestReport(type: JacocoReport){
+
+    description = "Creates code coverage for unitTests"
+
+    group 'coverage'
+
     executionData runUnitTests
     sourceSets sourceSets.main
     afterEvaluate {
@@ -94,11 +117,47 @@ task unitTestReport(type: JacocoReport){
 }
 
 task integrationTestReport(type: JacocoReport){
+
+    description = "Creates code coverage for integrationTests"
+
+    group 'coverage'
+
     executionData runIntegrationTests
     sourceSets sourceSets.main
 }
 
 task unitAndITcoverageReport(type: JacocoReport) {
+
+    description = "Creates code coverage for unit- and integrationTests"
+
+    group 'coverage'
+
     executionData runUnitTests, runIntegrationTests
     sourceSets sourceSets.main
+}
+
+sourceSets {
+
+    test {
+        test.java.srcDir "src/test/java"
+        test.resources.srcDir "src/test/resources"
+    }
+
+    main {
+        main.java.srcDir "src/main/java"
+        main.resources.srcDir "src/main/resources"
+    }
+
+    integration {
+        test.java.srcDir "src/integration/java"
+        test.resources.srcDir "src/integration/resources"
+        compileClasspath += sourceSets.test.runtimeClasspath
+    }
+
+    acceptance {
+        test.java.srcDir "src/acceptance/java"
+        test.resources.srcDir "src/acceptance/resources"
+        compileClasspath += sourceSets.test.runtimeClasspath
+    }
+
 }
